@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EduGenie - AI-Powered Educational Assistant for students, self-learners, and educators.">
+    <title>EduGenie - AI Educational Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>🎓 EduGenie</h1>
+        <p>Your AI-Powered Educational Assistant</p>
+    </header>
+
+    <!-- Main Container -->
+    <main>
+
+        <!-- Feature Selection -->
+        <section id="feature-select">
+            <h2>What would you like to do?</h2>
+            <div class="feature-buttons">
+                <button onclick="selectFeature('qa')">❓ Ask a Question</button>
+                <button onclick="selectFeature('explain')">💡 Explain a Concept</button>
+                <button onclick="selectFeature('quiz')">📝 Generate Quiz</button>
+                <button onclick="selectFeature('summarize')">📄 Summarize Text</button>
+                <button onclick="selectFeature('learn')">🗺️ Learning Path</button>
+            </div>
+        </section>
+
+        <!-- Input Section -->
+        <section id="input-section" style="display: none;">
+            <h2 id="input-title">Enter your input</h2>
+            <textarea id="user-input" rows="4" placeholder="Type here..."></textarea>
+            <button id="submit-btn" onclick="submitRequest()">Submit</button>
+            <button onclick="goBack()">← Back</button>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results-section" style="display: none;">
+            <h2>Response</h2>
+            <div id="result-content"></div>
+            <button onclick="goBack()">← Try Another</button>
+        </section>
+
+        <!-- Loading -->
+        <div id="loading" style="display: none;">
+            <p>⏳ Thinking...</p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 EduGenie — Built with ❤️ for Learning</p>
+    </footer>
+
+    <script>
+        let currentFeature = '';
+
+        const featureConfig = {
+            'qa':        { title: '❓ Ask a Question', placeholder: 'e.g., Which is the largest ocean?' },
+            'explain':   { title: '💡 Explain a Concept', placeholder: 'e.g., Pythagoras Theorem' },
+            'quiz':      { title: '📝 Generate Quiz', placeholder: 'e.g., Photosynthesis' },
+            'summarize': { title: '📄 Summarize Text', placeholder: 'Paste the text you want to summarize...' },
+            'learn':     { title: '🗺️ Learning Path', placeholder: 'e.g., SQL' }
+        };
+
+        function selectFeature(feature) {
+            currentFeature = feature;
+            document.getElementById('feature-select').style.display = 'none';
+            document.getElementById('results-section').style.display = 'none';
+            document.getElementById('input-section').style.display = 'block';
+            document.getElementById('input-title').textContent = featureConfig[feature].title;
+            document.getElementById('user-input').placeholder = featureConfig[feature].placeholder;
+            document.getElementById('user-input').value = '';
+        }
+
+        function goBack() {
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('results-section').style.display = 'none';
+            document.getElementById('feature-select').style.display = 'block';
+        }
+
+        async function submitRequest() {
+            const input = document.getElementById('user-input').value.trim();
+            if (!input) return alert('Please enter something!');
+
+            // Build request body based on feature
+            let url = '';
+            let body = {};
+
+            switch (currentFeature) {
+                case 'qa':
+                    url = '/qa';
+                    body = { question: input };
+                    break;
+                case 'explain':
+                    url = '/explain';
+                    body = { topic: input };
+                    break;
+                case 'quiz':
+                    url = '/quiz';
+                    body = { topic: input, num_questions: 5 };
+                    break;
+                case 'summarize':
+                    url = '/summarize';
+                    body = { text: input };
+                    break;
+                case 'learn':
+                    url = '/learn/recommendations';
+                    body = { topic: input, level: 'beginner' };
+                    break;
+            }
+
+            // Show loading
+            document.getElementById('input-section').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await response.json();
+
+                document.getElementById('result-content').textContent = data.response;
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('results-section').style.display = 'block';
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('input-section').style.display = 'block';
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
+
+</body>
+</html>
