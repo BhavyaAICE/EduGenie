@@ -8,7 +8,167 @@
 </head>
 <body>
 
-    <!-- TODO: Build the frontend here -->
+    <header>
+        <h1>EduGenie</h1>
+        <p>AI-Powered Educational Assistant</p>
+    </header>
+
+    <main>
+
+        <!-- Feature Selection -->
+        <div id="feature-select">
+            <h2>Choose a Feature</h2>
+            <div class="buttons">
+                <button onclick="selectFeature('qa')">Ask a Question</button>
+                <button onclick="selectFeature('explain')">Explain a Concept</button>
+                <button onclick="selectFeature('quiz')">Generate Quiz</button>
+                <button onclick="selectFeature('summarize')">Summarize Text</button>
+                <button onclick="selectFeature('learn')">Learning Path</button>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div id="input-area" style="display:none;">
+            <h2 id="input-title"></h2>
+            <textarea id="user-input" rows="5" placeholder="Type here..."></textarea>
+
+            <!-- Extra options for quiz -->
+            <div id="quiz-options" style="display:none;">
+                <label>Number of questions:
+                    <select id="num-questions">
+                        <option value="3">3</option>
+                        <option value="5" selected>5</option>
+                        <option value="10">10</option>
+                    </select>
+                </label>
+            </div>
+
+            <!-- Extra options for learning path -->
+            <div id="level-options" style="display:none;">
+                <label>Your level:
+                    <select id="user-level">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="submitRequest()">Submit</button>
+                <button onclick="goBack()">Back</button>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div id="loading" style="display:none;">
+            <p>Processing your request...</p>
+        </div>
+
+        <!-- Result Area -->
+        <div id="result-area" style="display:none;">
+            <h2>Response</h2>
+            <div id="result-content"></div>
+            <div class="action-buttons">
+                <button onclick="goBack()">Try Another</button>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>EduGenie &copy; 2026</p>
+    </footer>
+
+    <script>
+        let currentFeature = '';
+
+        const config = {
+            'qa':        { title: 'Ask a Question', placeholder: 'e.g., Which is the largest ocean?' },
+            'explain':   { title: 'Explain a Concept', placeholder: 'e.g., Pythagoras Theorem' },
+            'quiz':      { title: 'Generate Quiz', placeholder: 'e.g., Photosynthesis' },
+            'summarize': { title: 'Summarize Text', placeholder: 'Paste the text you want to summarize...' },
+            'learn':     { title: 'Learning Path', placeholder: 'e.g., SQL, Machine Learning, Python' }
+        };
+
+        function selectFeature(feature) {
+            currentFeature = feature;
+            document.getElementById('feature-select').style.display = 'none';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('input-area').style.display = 'block';
+            document.getElementById('input-title').textContent = config[feature].title;
+            document.getElementById('user-input').placeholder = config[feature].placeholder;
+            document.getElementById('user-input').value = '';
+
+            // Show/hide extra options
+            document.getElementById('quiz-options').style.display = feature === 'quiz' ? 'block' : 'none';
+            document.getElementById('level-options').style.display = feature === 'learn' ? 'block' : 'none';
+        }
+
+        function goBack() {
+            document.getElementById('input-area').style.display = 'none';
+            document.getElementById('result-area').style.display = 'none';
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('feature-select').style.display = 'block';
+        }
+
+        async function submitRequest() {
+            const input = document.getElementById('user-input').value.trim();
+            if (!input) {
+                alert('Please enter something.');
+                return;
+            }
+
+            let url = '';
+            let body = {};
+
+            switch (currentFeature) {
+                case 'qa':
+                    url = '/qa';
+                    body = { question: input };
+                    break;
+                case 'explain':
+                    url = '/explain';
+                    body = { topic: input };
+                    break;
+                case 'quiz':
+                    url = '/quiz';
+                    const numQ = parseInt(document.getElementById('num-questions').value);
+                    body = { topic: input, num_questions: numQ };
+                    break;
+                case 'summarize':
+                    url = '/summarize';
+                    body = { text: input };
+                    break;
+                case 'learn':
+                    url = '/learn/recommendations';
+                    const level = document.getElementById('user-level').value;
+                    body = { topic: input, level: level };
+                    break;
+            }
+
+            // Show loading, hide input
+            document.getElementById('input-area').style.display = 'none';
+            document.getElementById('loading').style.display = 'block';
+
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await response.json();
+
+                document.getElementById('result-content').textContent = data.response;
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('result-area').style.display = 'block';
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('input-area').style.display = 'block';
+                alert('Error: ' + error.message);
+            }
+        }
+    </script>
 
 </body>
 </html>

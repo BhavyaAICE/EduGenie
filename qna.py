@@ -1,23 +1,43 @@
-"""
-QnA Module - Intelligent Question Answering
+import os
+import google.generativeai as genai
 
-Handles educational question answering using AI.
-Endpoint: POST /qa
+# extracting the api key from the .env file
+api_key = os.getenv("GOOGLE_API_KEY")
 
-TODO: Implement the AI logic for answering questions.
-"""
+# configuring the genai
+if api_key:
+    genai.configure(api_key=api_key)
+else:
+    print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
 
-
+# main function
 def get_answer(question: str) -> str:
-    """
-    Takes a user's educational question and returns an AI-generated answer
-    with additional educational context.
 
-    Args:
-        question (str): The user's question (e.g., "Which is the largest ocean?")
+    # if no question is provided - edge case
+    if not question.strip():
+        return "Please provide a question to get an answer."
 
-    Returns:
-        str: AI-generated answer with educational context.
-    """
-    # TODO: Integrate Google Generative AI or local model here
-    return f"[QnA Module] Answer for: '{question}' — Not yet implemented."
+    try:
+        # initializing the model - used gemini 2.5 flash model
+        model = genai.GenerativeModel("gemini-2.5-flash")
+
+        # prompt for question answering
+        prompt = f"""
+            You are an expert educational assistant. Answer the following question clearly and accurately. Provide additional educational context, interesting facts, and related concepts to help the student learn more about the topic.
+
+            Question: {question}
+        """
+
+        # obtaining the response - temp = 0.5
+        response = model.generate_content(prompt,
+            generation_config=genai.types.GenerationConfig(
+                temperature=0.5
+            )
+        )
+
+        # returning the generated answer
+        return response.text.strip()
+
+    # error handling
+    except Exception as e:
+        return f"Error while generating the answer:\n{str(e)}"
