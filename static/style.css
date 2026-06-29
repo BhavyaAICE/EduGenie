@@ -119,9 +119,38 @@ select {
     padding: 15px;
     border: 1px solid #eee;
     margin: 10px 0;
-    white-space: pre-wrap;
-    line-height: 1.6;
+    line-height: 1.7;
     font-size: 14px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+#result-content h1, #result-content h2, #result-content h3 {
+    margin: 15px 0 8px 0;
+    color: #333;
+}
+
+#result-content h1 { font-size: 20px; }
+#result-content h2 { font-size: 17px; }
+#result-content h3 { font-size: 15px; }
+
+#result-content ul {
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+#result-content li {
+    margin: 4px 0;
+}
+
+#result-content hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 15px 0;
+}
+
+#result-content strong {
+    color: #222;
 }
 
 footer {

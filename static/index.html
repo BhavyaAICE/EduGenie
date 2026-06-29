@@ -159,7 +159,7 @@
                 });
                 const data = await response.json();
 
-                document.getElementById('result-content').textContent = data.response;
+                document.getElementById('result-content').innerHTML = markdownToHtml(data.response);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('result-area').style.display = 'block';
             } catch (error) {
@@ -167,6 +167,48 @@
                 document.getElementById('input-area').style.display = 'block';
                 alert('Error: ' + error.message);
             }
+        }
+
+        // Simple markdown to HTML converter
+        function markdownToHtml(text) {
+            if (!text) return '';
+            let html = text;
+
+            // Escape HTML special chars first
+            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            // Horizontal rules
+            html = html.replace(/^---+$/gm, '<hr>');
+
+            // Headers (### before ## before #)
+            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+            // Bold and italic
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+            // Unordered lists (lines starting with * or -)
+            html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
+            html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+
+            // Numbered lists
+            html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+
+            // Wrap consecutive <li> in <ul>
+            html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+            // Line breaks (double newline = paragraph, single = <br>)
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = html.replace(/\n/g, '<br>');
+            html = '<p>' + html + '</p>';
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p>\s*<\/p>/g, '');
+
+            return html;
         }
     </script>
 
