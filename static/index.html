@@ -1,216 +1,561 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduGenie - AI Educational Assistant</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <title>EduGenie AI</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <header>
-        <h1>EduGenie</h1>
-        <p>AI-Powered Educational Assistant</p>
+
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fa-solid fa-brain"></i>
+            </div>
+
+            <div>
+                <h2>EduGenie AI</h2>
+                <span>LEARN FASTER</span>
+            </div>
+        </div>
     </header>
 
-    <main>
 
-        <!-- Feature Selection -->
-        <div id="feature-select">
-            <h2>Choose a Feature</h2>
-            <div class="buttons">
-                <button onclick="selectFeature('qa')">Ask a Question</button>
-                <button onclick="selectFeature('explain')">Explain a Concept</button>
-                <button onclick="selectFeature('quiz')">Generate Quiz</button>
-                <button onclick="selectFeature('summarize')">Summarize Text</button>
-                <button onclick="selectFeature('learn')">Learning Path</button>
-            </div>
+    <nav>
+
+        <button class="active" id="explainerName">
+            <i class="fa-regular fa-lightbulb"></i>
+            Explainer
+        </button>
+
+        <button id="QnAName">
+            <i class="fa-regular fa-comment"></i>
+            QnA Hub
+        </button>
+
+        <button id="summarizerName">
+            <i class="fa-regular fa-file-lines"></i>
+            Summarizer
+        </button>
+
+        <button id="quizName">
+            <i class="fa-solid fa-circle-dot"></i>
+            Quiz
+        </button>
+
+        <button id="roadmapName">
+            <i class="fa-regular fa-map"></i>
+            Roadmap
+        </button>
+
+    </nav>
+
+
+
+    <section class="hero Explainer" id="Explainer">
+
+
+
+        <div class="icon-circle">
+            <i class="fa-regular fa-lightbulb"></i>
         </div>
 
-        <!-- Input Area -->
-        <div id="input-area" style="display:none;">
-            <h2 id="input-title"></h2>
-            <textarea id="user-input" rows="5" placeholder="Type here..."></textarea>
+        <h1>Concept Explainer</h1>
 
-            <!-- Extra options for quiz -->
-            <div id="quiz-options" style="display:none;">
-                <label>Number of questions:
-                    <select id="num-questions">
-                        <option value="3">3</option>
-                        <option value="5" selected>5</option>
-                        <option value="10">10</option>
+
+        <div class="subline">
+            <p>Get a plain-language breakdown of any topic, instantly.</p>
+        </div>
+
+        <div class="chat-feed-container"> </div>
+
+
+        <div class="search-box">
+
+            <input type="text" placeholder="e.g. quantum entanglement, recursion, photosynthesis...">
+
+            <button>
+                Explain Concept
+            </button>
+
+        </div>
+
+
+
+
+
+        <small>
+            Built with EduGenie AI · Demo responses are simulated
+        </small>
+
+    </section>
+
+
+
+    <section class="hero QnA" id="QnA">
+
+
+
+        <div class="icon-circle">
+            <i class="fa-regular fa-lightbulb"></i>
+        </div>
+
+        <h1>QnA hub</h1>
+
+
+        <div class="subLine">
+            <p>Ask anything.Get accurate answers.</p>
+        </div>
+
+        <div class="chat-feed-container"> </div>
+
+        <div class="search-box">
+
+            <input type="text" placeholder="Ask you question...">
+
+            <button>
+                Ask AI
+            </button>
+
+        </div>
+
+        <small>
+            Built with EduGenie AI · Demo responses are simulated
+        </small>
+
+    </section>
+
+
+    <section class="hero summarizer" id="summarizer">
+
+
+
+        <div class="icon-circle">
+            <i class="fa-regular fa-lightbulb"></i>
+        </div>
+
+        <h1>Summarizer</h1>
+
+        <div class="subLine">
+            <p>Summarize long text into clear, concise insights.</p>
+        </div>
+
+        <div class="chat-feed-container"> </div>
+
+        <div class="search-box">
+
+            <input type="text" placeholder="Ask you question...">
+
+
+        </div>
+
+        <div class="strength">
+            <p>Summary length: </p>
+
+            <div class="strengthEasy">
+                <input type="radio" name="strength" id="strength" class="Short">
+                <label for="Short">Short</label>
+            </div>
+
+            <div class="strengthEasy">
+                <input type="radio" name="strength" id="strength" class="medium">
+                <label for="medium">medium</label>
+            </div>
+
+            <div class="strengthEasy">
+                <input type="radio" name="strength" id="strength" class="Detailed">
+                <label for="Detailed">Detailed</label>
+            </div>
+
+            <button type="submit">Summarize</button>
+        </div>
+
+        <small>
+            Built with EduGenie AI · Demo responses are simulated
+        </small>
+
+    </section>
+
+
+    <section class="hero Quiz" id="Quiz">
+
+
+
+        <div class="icon-circle">
+            <i class="fa-regular fa-lightbulb"></i>
+        </div>
+
+        <h1>Quiz Generator</h1>
+
+
+        <div class="chat-feed-container"> </div>
+
+        <div class="QuizGenerator">
+            <form class="quizSetting">
+                <h2>Quiz Setting</h2>
+
+                <div class="topic quizSettingTopic">
+                    <label for="quizTopic">Topic</label>
+                    <input type="text" class="quizTopic" required>
+                </div>
+
+                <div class="difficulty quizSettingTopic">
+                    <label for="difficultyLevel">Difficulty</label>
+                    <select name="" id="" class="difficultyLevel" required>
+                        <option value="">Easy</option>
+                        <option value="">Medium</option>
+                        <option value="">Hard</option>
+
                     </select>
-                </label>
+                </div>
+                <div class="NoOfQuestion quizSettingTopic">
+                    <label for="QuestionNo">Number of question</label>
+                    <input type="text" inputmode="numeric" required>
+
+
+                </div>
+
+                <button type="submit">Generate Quiz</button>
+            </form>
+
+            <div class="question">
+
+                <p>Generate the quiz.</p>
+
             </div>
 
-            <!-- Extra options for learning path -->
-            <div id="level-options" style="display:none;">
-                <label>Your level:
-                    <select id="user-level">
-                        <option value="beginner">Beginner</option>
-                        <option value="intermediate">Intermediate</option>
-                        <option value="advanced">Advanced</option>
-                    </select>
-                </label>
-            </div>
-
-            <div class="action-buttons">
-                <button onclick="submitRequest()">Submit</button>
-                <button onclick="goBack()">Back</button>
-            </div>
-        </div>
-
-        <!-- Loading -->
-        <div id="loading" style="display:none;">
-            <p>Processing your request...</p>
-        </div>
-
-        <!-- Result Area -->
-        <div id="result-area" style="display:none;">
-            <h2>Response</h2>
-            <div id="result-content"></div>
-            <div class="action-buttons">
-                <button onclick="goBack()">Try Another</button>
+            <div class="score">
+                <h2>Score</h2>
+                <div class="scoreCard">
+                    <p></p>
+                </div>
             </div>
         </div>
 
-    </main>
+    </section>
 
-    <footer>
-        <p>EduGenie &copy; 2026</p>
-    </footer>
+
+    <section class="hero roadmap" id="roadmap">
+
+
+
+        <div class="icon-circle">
+            <i class="fa-regular fa-lightbulb"></i>
+        </div>
+
+        <h1>Roadmap</h1>
+
+        <div class="subLine">
+            <p>Generate a best Roadmap for your plan.</p>
+        </div>
+
+        <div class="chat-feed-container"> </div>
+
+        <div class="search-box">
+
+            <input type="text" placeholder="Ask you goal">
+
+            <button>
+                Get roadmap
+            </button>
+
+        </div>
+
+        <small>
+            Built with EduGenie AI · Demo responses are simulated
+        </small>
+
+    </section>
+
+
+
 
     <script>
-        let currentFeature = '';
+        const explainerBtn = document.getElementById("explainerName");
+        const Explainer = document.getElementById("Explainer");
+        function ExplainerShow() {
+            Explainer.style.visibility = 'visible';
+            Explainer.style.opacity = '1';
+            Explainer.style.position = 'relative';
+            Explainer.style.top = '0px';
+            explainerBtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
+            explainerBtn.style.color = 'white'
+            explainerBtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)'
 
-        const config = {
-            'qa':        { title: 'Ask a Question', placeholder: 'e.g., Which is the largest ocean?' },
-            'explain':   { title: 'Explain a Concept', placeholder: 'e.g., Pythagoras Theorem' },
-            'quiz':      { title: 'Generate Quiz', placeholder: 'e.g., Photosynthesis' },
-            'summarize': { title: 'Summarize Text', placeholder: 'Paste the text you want to summarize...' },
-            'learn':     { title: 'Learning Path', placeholder: 'e.g., SQL, Machine Learning, Python' }
-        };
+            QnA.style.visibility = 'hidden';
+            QnA.style.opacity = '0';
+            QnA.style.position = 'absolute';
+            QnA.style.top = '-4000px';
+            QnABtn.style.background = 'none';
+            QnABtn.style.boxShadow = 'none';
 
-        function selectFeature(feature) {
-            currentFeature = feature;
-            document.getElementById('feature-select').style.display = 'none';
-            document.getElementById('result-area').style.display = 'none';
-            document.getElementById('input-area').style.display = 'block';
-            document.getElementById('input-title').textContent = config[feature].title;
-            document.getElementById('user-input').placeholder = config[feature].placeholder;
-            document.getElementById('user-input').value = '';
+            summarizer.style.visibility = 'hidden';
+            summarizer.style.opacity = '0';
+            summarizer.style.position = 'absolute';
+            summarizer.style.top = '-4000px';
+            summarizerBtn.style.background = 'none';
+            summarizerBtn.style.boxShadow = 'none';
 
-            // Show/hide extra options
-            document.getElementById('quiz-options').style.display = feature === 'quiz' ? 'block' : 'none';
-            document.getElementById('level-options').style.display = feature === 'learn' ? 'block' : 'none';
+
+
+            Quiz.style.visibility = 'hidden';
+            Quiz.style.opacity = '0';
+            Quiz.style.position = 'absolute';
+            Quiz.style.top = '-4000px';
+            quizBtn.style.background = 'none';
+            quizBtn.style.boxShadow = 'none'
+
+
+            roadmap.style.visibility = 'hidden';
+            roadmap.style.opacity = '0';
+            roadmap.style.position = 'absolute';
+            roadmap.style.top = '-4000px';
+            roadmapBtn.style.background = 'none';
+            roadmapBtn.style.boxShadow = 'none';
+
+
+
         }
 
-        function goBack() {
-            document.getElementById('input-area').style.display = 'none';
-            document.getElementById('result-area').style.display = 'none';
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('feature-select').style.display = 'block';
+        explainerBtn.addEventListener('click', function () {
+            ExplainerShow();
+        })
+
+
+
+        const QnABtn = document.getElementById("QnAName");
+        const QnA = document.getElementById("QnA");
+        function QnAShow() {
+            QnA.style.visibility = 'visible';
+            QnA.style.opacity = '1';
+            QnA.style.position = 'relative';
+            QnA.style.top = '0px';
+            QnABtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
+            QnABtn.style.color = 'white'
+            QnABtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)'
+
+
+
+            roadmap.style.visibility = 'hidden';
+            roadmap.style.opacity = '0';
+            roadmap.style.position = 'absolute';
+            roadmap.style.top = '-4000px';
+            roadmapBtn.style.background = 'none';
+            roadmapBtn.style.boxShadow = 'none';
+
+
+            Explainer.style.visibility = 'hidden';
+            Explainer.style.opacity = '0';
+            Explainer.style.position = 'absolute';
+            Explainer.style.top = '-4000px';
+            explainerBtn.style.background = 'none';
+            explainerBtn.style.boxShadow = 'none'
+
+
+
+            Quiz.style.visibility = 'hidden';
+            Quiz.style.opacity = '0';
+            Quiz.style.position = 'absolute';
+            Quiz.style.top = '-4000px';
+            quizBtn.style.background = 'none';
+            quizBtn.style.boxShadow = 'none'
+
+
+            summarizer.style.visibility = 'hidden';
+            summarizer.style.opacity = '0';
+            summarizer.style.position = 'absolute';
+            summarizer.style.top = '-4000px';
+            summarizerBtn.style.background = 'none';
+            summarizerBtn.style.boxShadow = 'none'
+
+
         }
 
-        async function submitRequest() {
-            const input = document.getElementById('user-input').value.trim();
-            if (!input) {
-                alert('Please enter something.');
-                return;
-            }
+        QnABtn.addEventListener('click', function () {
+            QnAShow();
+        })
 
-            let url = '';
-            let body = {};
 
-            switch (currentFeature) {
-                case 'qa':
-                    url = '/qa';
-                    body = { question: input };
-                    break;
-                case 'explain':
-                    url = '/explain';
-                    body = { topic: input };
-                    break;
-                case 'quiz':
-                    url = '/quiz';
-                    const numQ = parseInt(document.getElementById('num-questions').value);
-                    body = { topic: input, num_questions: numQ };
-                    break;
-                case 'summarize':
-                    url = '/summarize';
-                    body = { text: input };
-                    break;
-                case 'learn':
-                    url = '/learn/recommendations';
-                    const level = document.getElementById('user-level').value;
-                    body = { topic: input, level: level };
-                    break;
-            }
+        const summarizerBtn = document.getElementById("summarizerName");
+        const summarizer = document.getElementById("summarizer");
+        function summarizerShow() {
+            summarizer.style.visibility = 'visible';
+            summarizer.style.opacity = '1';
+            summarizer.style.position = 'relative';
+            summarizer.style.top = 0;
+            summarizerBtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
+            summarizerBtn.style.color = 'white'
+            summarizerBtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)'
 
-            // Show loading, hide input
-            document.getElementById('input-area').style.display = 'none';
-            document.getElementById('loading').style.display = 'block';
 
-            try {
-                const response = await fetch(url, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
-                const data = await response.json();
+            roadmap.style.visibility = 'hidden';
+            roadmap.style.opacity = '0';
+            roadmap.style.position = 'absolute';
+            roadmap.style.top = '-4000px';
+            roadmapBtn.style.background = 'none';
+            roadmapBtn.style.boxShadow = 'none';
 
-                document.getElementById('result-content').innerHTML = markdownToHtml(data.response);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('result-area').style.display = 'block';
-            } catch (error) {
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('input-area').style.display = 'block';
-                alert('Error: ' + error.message);
-            }
+
+            Quiz.style.visibility = 'hidden';
+            Quiz.style.opacity = '0';
+            Quiz.style.position = 'absolute';
+            Quiz.style.top = '-4000px';
+            quizBtn.style.background = 'none';
+            quizBtn.style.boxShadow = 'none';
+
+
+            Explainer.style.visibility = 'hidden';
+            Explainer.style.opacity = '0';
+            Explainer.style.position = 'absolute';
+            Explainer.style.top = '-4000px';
+            explainerBtn.style.background = 'none';
+            explainerBtn.style.boxShadow = 'none'
+
+
+
+            QnA.style.visibility = 'hidden';
+            QnA.style.opacity = '0';
+            QnA.style.position = 'absolute';
+            QnA.style.top = '-4000px';
+            QnABtn.style.background = 'none';
+            QnABtn.style.boxShadow = 'none'
+
+
+
+
         }
 
-        // Simple markdown to HTML converter
-        function markdownToHtml(text) {
-            if (!text) return '';
-            let html = text;
+        summarizerBtn.addEventListener('click', function () {
+            summarizerShow();
+        })
 
-            // Escape HTML special chars first
-            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-            // Horizontal rules
-            html = html.replace(/^---+$/gm, '<hr>');
 
-            // Headers (### before ## before #)
-            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-            html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
 
-            // Bold and italic
-            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
-            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+        const quizBtn = document.getElementById("quizName");
+        const Quiz = document.getElementById("Quiz");
+        function QuizShow() {
+            Quiz.style.visibility = 'visible';
+            Quiz.style.opacity = '1';
+            Quiz.style.position = 'relative';
+            Quiz.style.top = 0;
+            quizBtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
+            quizBtn.style.color = 'white'
+            quizBtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)';
 
-            // Unordered lists (lines starting with * or -)
-            html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
-            html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
 
-            // Numbered lists
-            html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+            Explainer.style.visibility = 'hidden';
+            Explainer.style.opacity = '0';
+            Explainer.style.position = 'absolute';
+            Explainer.style.top = '-4000px';
+            explainerBtn.style.background = 'none';
+            explainerBtn.style.boxShadow = 'none';
 
-            // Wrap consecutive <li> in <ul>
-            html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
 
-            // Line breaks (double newline = paragraph, single = <br>)
-            html = html.replace(/\n\n/g, '</p><p>');
-            html = html.replace(/\n/g, '<br>');
-            html = '<p>' + html + '</p>';
 
-            // Clean up empty paragraphs
-            html = html.replace(/<p>\s*<\/p>/g, '');
+            QnA.style.visibility = 'hidden';
+            QnA.style.opacity = '0';
+            QnA.style.position = 'absolute';
+            QnA.style.top = '-4000px';
+            QnABtn.style.background = 'none';
+            quizBtn.style.boxShadow = 'none';
 
-            return html;
+
+
+            summarizer.style.visibility = 'hidden';
+            summarizer.style.opacity = '0';
+            summarizer.style.position = 'absolute';
+            summarizer.style.top = '-4000px';
+            summarizerBtn.style.background = 'none';
+            summarizerBtn.style.boxShadow = 'none';
+
+
+            roadmap.style.visibility = 'hidden';
+            roadmap.style.opacity = '0';
+            roadmap.style.position = 'absolute';
+            roadmap.style.top = '-4000px';
+            roadmapBtn.style.background = 'none';
+            roadmapBtn.style.boxShadow = 'none';
+
+
+
         }
+
+        quizBtn.addEventListener('click', function () {
+            QuizShow();
+        })
+
+
+
+        const roadmapBtn = document.getElementById("roadmapName");
+        const roadmap = document.getElementById("roadmap");
+        function roadmapShow() {
+            roadmap.style.visibility = 'visible';
+            roadmap.style.opacity = '1';
+            roadmap.style.position = 'relative';
+            roadmap.style.top = 0;
+            roadmapBtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
+            roadmapBtn.style.color = 'white'
+            roadmapBtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)'
+
+
+            Explainer.style.visibility = 'hidden';
+            Explainer.style.opacity = '0';
+            Explainer.style.position = 'absolute';
+            Explainer.style.top = '-4000px';
+            explainerBtn.style.background = 'none';
+            explainerBtn.style.boxShadow = 'none'
+
+
+
+            QnA.style.visibility = 'hidden';
+            QnA.style.opacity = '0';
+            QnA.style.position = 'absolute';
+            QnA.style.top = '-4000px';
+            QnABtn.style.background = 'none';
+            QnABtn.style.boxShadow = 'none'
+
+
+            summarizer.style.visibility = 'hidden';
+            summarizer.style.opacity = '0';
+            summarizer.style.position = 'absolute';
+            summarizer.style.top = '-4000px';
+            summarizerBtn.style.background = 'none';
+            summarizerBtn.style.boxShadow = 'none';
+
+
+            Quiz.style.visibility = 'hidden';
+            Quiz.style.opacity = '0';
+            Quiz.style.position = 'absolute';
+            Quiz.style.top = '-4000px';
+            quizBtn.style.background = 'none';
+            quizBtn.style.boxShadow = 'none'
+
+
+
+
+
+
+        }
+
+        roadmapBtn.addEventListener('click', function () {
+            roadmapShow();
+        })
+
     </script>
 
+
+
 </body>
+
 </html>
