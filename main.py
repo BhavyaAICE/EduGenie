@@ -39,6 +39,7 @@ class ExplanationRequest(BaseModel):
 class QuizRequest(BaseModel):
     topic: str
     num_questions: int = 5
+    difficulty: str = "Easy"
 
 class SummaryRequest(BaseModel):
     text: str
@@ -73,7 +74,7 @@ async def explain_concept(request: ExplanationRequest):
 @app.post("/quiz")
 async def quiz_generation(request: QuizRequest):
     """Generate a quiz on a given topic."""
-    result = generate_quiz(request.topic, request.num_questions)
+    result = generate_quiz(request.topic, request.num_questions, request.difficulty)
     return {"response": result}
 
 

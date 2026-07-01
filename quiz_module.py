@@ -1,4 +1,5 @@
 import os
+import json
 import google.generativeai as genai
 
 # extracting the api key from the .env file
@@ -11,39 +12,67 @@ else:
     print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
 
 # main function
-def generate_quiz(topic: str, num_questions: int = 5) -> str:
+def generate_quiz(topic: str, num_questions: int = 5, difficulty: str = "Easy") -> dict:
 
     # if no topic is provided - edge case
     if not topic.strip():
-        return "Please provide a topic to generate a quiz."
+        return {"error": "Please provide a topic to generate a quiz."}
 
     try:
         # initializing the model - used gemini 2.5 flash model
         model = genai.GenerativeModel("gemini-2.5-flash")
 
-        # prompt for quiz generation
+        # prompt for structured quiz generation
         prompt = f"""
-            You are an expert educational quiz generator. Create a quiz with exactly {num_questions} multiple-choice questions on the topic: "{topic}".
+            You are an expert educational quiz generator. Create exactly {num_questions} multiple-choice questions on the topic: "{topic}".
+            Difficulty level: {difficulty}.
 
-            For each question:
-            1. Write a clear question
-            2. Provide 4 options (A, B, C, D)
-            3. Indicate the correct answer
-            4. Give a brief explanation of why that answer is correct
+            IMPORTANT: Return ONLY valid JSON in this exact format, no other text:
+            {{
+                "questions": [
+                    {{
+                        "question": "The question text here?",
+                        "options": {{
+                            "A": "First option",
+                            "B": "Second option",
+                            "C": "Third option",
+                            "D": "Fourth option"
+                        }},
+                        "correct": "A",
+                        "explanation": "Brief explanation of why this is correct."
+                    }}
+                ]
+            }}
 
-            Format the output clearly and make it easy to read for students.
+            Rules:
+            - Generate exactly {num_questions} questions
+            - Each question must have exactly 4 options: A, B, C, D
+            - "correct" must be one of: "A", "B", "C", "D"
+            - Adjust complexity based on difficulty: {difficulty}
+            - Return ONLY the JSON, no markdown, no code blocks
         """
 
-        # obtaining the response - temp = 0.7 for more creative questions
+        # obtaining the response - temp = 0.7
         response = model.generate_content(prompt,
             generation_config=genai.types.GenerationConfig(
                 temperature=0.7
             )
         )
 
-        # returning the generated quiz
-        return response.text.strip()
+        # parse the JSON response
+        raw_text = response.text.strip()
+
+        # clean up if wrapped in code blocks
+        if raw_text.startswith("```"):
+            raw_text = raw_text.split("\n", 1)[1]  # remove first line
+            raw_text = raw_text.rsplit("```", 1)[0]  # remove last ```
+            raw_text = raw_text.strip()
+
+        quiz_data = json.loads(raw_text)
+        return quiz_data
 
     # error handling
+    except json.JSONDecodeError as e:
+        return {"error": f"Failed to parse quiz data. Please try again.\n{str(e)}"}
     except Exception as e:
-        return f"Error while generating the quiz:\n{str(e)}"
+        return {"error": f"Error while generating the quiz:\n{str(e)}"}
