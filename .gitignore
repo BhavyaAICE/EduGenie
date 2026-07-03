@@ -8,3 +8,12 @@ venv/
 dist/
 build/
 .DS_Store
+
+# Testing artifacts (not needed in production)
+locustfile.py
+Locust_*.html
+Locust_*.csv
+Screenshot*.png
+
+# Documentation PDFs (not needed for deployment)
+*.pdf
