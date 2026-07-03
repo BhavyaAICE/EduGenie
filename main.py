@@ -2,12 +2,12 @@
 EduGenie - Main Application Entry Point
 
 FastAPI application that routes user requests to the appropriate AI module.
-Serves the frontend and exposes API endpoints for all educational features.
+Serves the frontend via Jinja2 templates and exposes API endpoints for all educational features.
 """
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -26,6 +26,9 @@ app = FastAPI(title="EduGenie", description="AI-Powered Educational Assistant")
 
 # Serve static files (HTML, CSS)
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+# Jinja2 template rendering
+templates = Jinja2Templates(directory="static")
 
 
 # ─── Request Models ───────────────────────────────────────────────
@@ -52,41 +55,45 @@ class LearningPathRequest(BaseModel):
 # ─── Routes ───────────────────────────────────────────────────────
 
 @app.get("/")
-async def serve_frontend():
-    """Serve the main frontend page."""
-    return FileResponse("static/index.html")
+async def serve_frontend(request: Request):
+    """Serve the main frontend page using Jinja2 template rendering."""
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "app_title": "EduGenie AI",
+        "app_description": "AI-Powered Educational Assistant"
+    })
 
 
 @app.post("/qa")
-async def question_answer(request: QuestionRequest):
+def question_answer(request: QuestionRequest):
     """Answer an educational question."""
     result = get_answer(request.question)
     return {"response": result}
 
 
 @app.post("/explain")
-async def explain_concept(request: ExplanationRequest):
+def explain_concept(request: ExplanationRequest):
     """Explain a concept in simple terms."""
     result = get_explanation(request.topic)
     return {"response": result}
 
 
 @app.post("/quiz")
-async def quiz_generation(request: QuizRequest):
+def quiz_generation(request: QuizRequest):
     """Generate a quiz on a given topic."""
     result = generate_quiz(request.topic, request.num_questions, request.difficulty)
     return {"response": result}
 
 
 @app.post("/summarize")
-async def summarize_text(request: SummaryRequest):
+def summarize_text(request: SummaryRequest):
     """Summarize the provided educational text."""
     result = get_summary(request.text)
     return {"response": result}
 
 
 @app.post("/learn/recommendations")
-async def learning_recommendations(request: LearningPathRequest):
+def learning_recommendations(request: LearningPathRequest):
     """Generate a personalized learning path."""
     result = get_learning_path(request.topic, request.level)
     return {"response": result}

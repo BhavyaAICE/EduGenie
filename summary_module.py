@@ -10,7 +10,10 @@ if api_key:
 else:
     print("Gemini Api not configured. Environment Variable not found")
 
+import functools
+
 # main function
+@functools.lru_cache(maxsize=100)
 def get_summary(text: str) -> str:
 
     # if no text is provided - edge case
@@ -20,7 +23,7 @@ def get_summary(text: str) -> str:
 
     try:
         # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.5-flash") 
+        model = genai.GenerativeModel("gemini-1.5-pro") 
 
         # prompt for summary generation
         prompt = f"""

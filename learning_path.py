@@ -11,7 +11,10 @@ if api_key:
 else:
     print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
 
+import functools
+
 # main function
+@functools.lru_cache(maxsize=100)
 def get_learning_path(topic: str, level: str = "beginner") -> dict:
 
     # if no topic is provided - edge case
@@ -20,7 +23,7 @@ def get_learning_path(topic: str, level: str = "beginner") -> dict:
 
     try:
         # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-1.5-pro")
 
         # prompt for learning path generation
         prompt = f"""

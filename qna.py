@@ -10,7 +10,10 @@ if api_key:
 else:
     print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
 
+import functools
+
 # main function
+@functools.lru_cache(maxsize=100)
 def get_answer(question: str) -> str:
 
     # if no question is provided - edge case
@@ -19,7 +22,7 @@ def get_answer(question: str) -> str:
 
     try:
         # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.5-flash")
+        model = genai.GenerativeModel("gemini-1.5-pro")
 
         # prompt for question answering
         prompt = f"""

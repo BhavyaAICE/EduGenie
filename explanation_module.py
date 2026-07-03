@@ -1,10 +1,12 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+import functools
 # AutoTokenizer for tokenization process. AutoModelForSeq2SeqLM for loading the main architectural model of lamini
 
 tokenizer = None
 model = None
 # initialize the global variable with none
 
+@functools.lru_cache(maxsize=100)
 def get_explanation(topic: str) -> str:
 
     global tokenizer, model
