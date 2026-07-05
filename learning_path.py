@@ -23,7 +23,7 @@ def get_learning_path(topic: str, level: str = "beginner") -> dict:
 
     try:
         # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        model = genai.GenerativeModel("gemini-1.5-flash")
 
         # prompt for learning path generation
         prompt = f"""
