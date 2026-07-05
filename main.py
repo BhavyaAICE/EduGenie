@@ -6,9 +6,9 @@ Serves the frontend via Jinja2 templates and exposes API endpoints for all educa
 """
 
 import os
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
@@ -31,9 +31,6 @@ app = FastAPI(title="EduGenie", description="AI-Powered Educational Assistant")
 
 # Serve static files (HTML, CSS) using absolute path
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
-
-# Jinja2 template rendering using absolute path
-templates = Jinja2Templates(directory=STATIC_DIR)
 
 
 # ─── Request Models ───────────────────────────────────────────────
@@ -60,16 +57,9 @@ class LearningPathRequest(BaseModel):
 # ─── Routes ───────────────────────────────────────────────────────
 
 @app.get("/")
-async def serve_frontend(request: Request):
-    """Serve the main frontend page using Jinja2 template rendering."""
-    return templates.TemplateResponse(
-        name="index.html",
-        context={
-            "request": request,
-            "app_title": "EduGenie AI",
-            "app_description": "AI-Powered Educational Assistant"
-        }
-    )
+async def serve_frontend():
+    """Serve the main frontend page."""
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
 
 @app.post("/qa")
