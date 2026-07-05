@@ -1,7 +1,13 @@
 import os
-from functools import lru_cache
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
-# AutoTokenizer for tokenization process. AutoModelForSeq2SeqLM for loading the main architectural model of lamini
+import functools
+
+# Try to load LaMini-Flan-T5 locally; fall back to Gemini API on cloud (Render free tier has limited RAM)
+try:
+    from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+    # AutoTokenizer for tokenization process. AutoModelForSeq2SeqLM for loading the main architectural model of lamini
+    LAMINI_AVAILABLE = True
+except ImportError:
+    LAMINI_AVAILABLE = False
 
 tokenizer = None
 model = None
@@ -10,15 +16,14 @@ model = None
 # Cache directory for Render persistent disk (avoids re-downloading on every deploy)
 CACHE_DIR = os.environ.get("TRANSFORMERS_CACHE", None)
 
-@lru_cache(maxsize=100)
-def get_explanation(topic: str) -> str:
 
+def _explain_with_lamini(topic: str) -> str:
+    """Explain using the local LaMini-Flan-T5-248M model."""
     global tokenizer, model
     # For using the global variables (not creating new ones)
-    
-    if model is None:
-        # for the startup only, when the application loads for the first time, model = none , so it will download the 1gb of data required by Lamini
 
+    if model is None:
+        # for the startup only, when the application loads for the first time
         print("Lamini model is loading...")
         tokenizer = AutoTokenizer.from_pretrained("MBZUAI/LaMini-Flan-T5-248M", cache_dir=CACHE_DIR)
         model = AutoModelForSeq2SeqLM.from_pretrained("MBZUAI/LaMini-Flan-T5-248M", cache_dir=CACHE_DIR)
@@ -34,5 +39,49 @@ def get_explanation(topic: str) -> str:
 
     text_output = tokenizer.decode(outputs[0], skip_special_tokens=True)
     # number to text generation
-    
+
     return text_output.strip()
+
+
+def _explain_with_gemini(topic: str) -> str:
+    """Fallback: Explain using Google Gemini API when LaMini can't be loaded (e.g., on Render free tier)."""
+    import google.generativeai as genai
+
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if api_key:
+        genai.configure(api_key=api_key)
+
+    model = genai.GenerativeModel("gemini-1.5-pro")
+    prompt = f"""You are a friendly teacher. Explain the following topic in very simple, 
+    easy-to-understand terms for a student. Use analogies and examples where helpful.
+    
+    Topic: {topic}"""
+
+    response = model.generate_content(prompt,
+        generation_config=genai.types.GenerationConfig(
+            temperature=0.7
+        )
+    )
+    return response.text.strip()
+
+
+@functools.lru_cache(maxsize=100)
+def get_explanation(topic: str) -> str:
+    """Get an explanation - uses LaMini locally, Gemini on cloud."""
+
+    if not topic.strip():
+        return "Please provide a topic to get an explanation."
+
+    try:
+        if LAMINI_AVAILABLE:
+            return _explain_with_lamini(topic)
+        else:
+            print("LaMini not available, using Gemini API fallback.")
+            return _explain_with_gemini(topic)
+    except Exception as e:
+        # If LaMini fails (e.g., out of memory), try Gemini as fallback
+        try:
+            print(f"LaMini failed ({e}), falling back to Gemini API.")
+            return _explain_with_gemini(topic)
+        except Exception as gemini_error:
+            return f"Error while generating the explanation:\n{str(gemini_error)}"
