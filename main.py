@@ -63,9 +63,9 @@ class LearningPathRequest(BaseModel):
 async def serve_frontend(request: Request):
     """Serve the main frontend page using Jinja2 template rendering."""
     return templates.TemplateResponse(
-        request=request,
         name="index.html",
         context={
+            "request": request,
             "app_title": "EduGenie AI",
             "app_description": "AI-Powered Educational Assistant"
         }
