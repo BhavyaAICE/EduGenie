@@ -62,11 +62,14 @@ class LearningPathRequest(BaseModel):
 @app.get("/")
 async def serve_frontend(request: Request):
     """Serve the main frontend page using Jinja2 template rendering."""
-    return templates.TemplateResponse("index.html", {
-        "request": request,
-        "app_title": "EduGenie AI",
-        "app_description": "AI-Powered Educational Assistant"
-    })
+    return templates.TemplateResponse(
+        request=request,
+        name="index.html",
+        context={
+            "app_title": "EduGenie AI",
+            "app_description": "AI-Powered Educational Assistant"
+        }
+    )
 
 
 @app.post("/qa")
