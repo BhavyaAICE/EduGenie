@@ -5,6 +5,7 @@ FastAPI application that routes user requests to the appropriate AI module.
 Serves the frontend via Jinja2 templates and exposes API endpoints for all educational features.
 """
 
+import os
 from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -13,6 +14,10 @@ from dotenv import load_dotenv
 
 # Load environment variables
 load_dotenv()
+
+# Get the absolute path to the directory containing main.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "static")
 
 # Import modules
 from qna import get_answer
@@ -24,11 +29,11 @@ from learning_path import get_learning_path
 # Initialize FastAPI app
 app = FastAPI(title="EduGenie", description="AI-Powered Educational Assistant")
 
-# Serve static files (HTML, CSS)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+# Serve static files (HTML, CSS) using absolute path
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-# Jinja2 template rendering
-templates = Jinja2Templates(directory="static")
+# Jinja2 template rendering using absolute path
+templates = Jinja2Templates(directory=STATIC_DIR)
 
 
 # ─── Request Models ───────────────────────────────────────────────
