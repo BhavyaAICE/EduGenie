@@ -1,17 +1,17 @@
 import os
 import json
-import google.generativeai as genai
+from google import genai
+import functools
 
 # extracting the api key from the .env file
 api_key = os.getenv("GOOGLE_API_KEY")
 
-# configuring the genai
+# configuring the genai client
 if api_key:
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 else:
+    client = None
     print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
-
-import functools
 
 # main function
 @functools.lru_cache(maxsize=100)
@@ -22,8 +22,8 @@ def get_learning_path(topic: str, level: str = "beginner") -> dict:
         return {"error": "Please provide a topic to generate a learning path."}
 
     try:
-        # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        if not client:
+            return {"error": "Gemini API key is missing."}
 
         # prompt for learning path generation
         prompt = f"""
@@ -61,8 +61,10 @@ def get_learning_path(topic: str, level: str = "beginner") -> dict:
         """
 
         # obtaining the response - temp = 0.6
-        response = model.generate_content(prompt,
-            generation_config=genai.types.GenerationConfig(
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
                 temperature=0.6
             )
         )

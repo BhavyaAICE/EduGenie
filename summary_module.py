@@ -1,13 +1,14 @@
 import os
-import google.generativeai as genai
+from google import genai
 
 # extracting the api key from the .env file
 api_key = os.getenv("GOOGLE_API_KEY")
 
-# configuring the genai
+# configuring the genai client
 if api_key:
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 else:
+    client = None
     print("Gemini Api not configured. Environment Variable not found")
 
 import functools
@@ -21,9 +22,9 @@ def get_summary(text: str) -> str:
         return "You need to provide a string to get the summary"
 
 
-    try:
-        # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.0-flash") 
+    try:    
+        if not client:
+            return "Gemini API key is missing."
 
         # prompt for summary generation
         prompt = f"""
@@ -33,8 +34,10 @@ def get_summary(text: str) -> str:
         """
 
         # obtaining the response - temp = 0.5
-        response = model.generate_content(prompt,
-            generation_config=genai.types.GenerationConfig(
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
                 temperature=0.5
             )
         )

@@ -45,20 +45,24 @@ def _explain_with_lamini(topic: str) -> str:
 
 def _explain_with_gemini(topic: str) -> str:
     """Fallback: Explain using Google Gemini API when LaMini can't be loaded (e.g., on Render free tier)."""
-    import google.generativeai as genai
+    from google import genai
+    import os
 
     api_key = os.getenv("GOOGLE_API_KEY")
-    if api_key:
-        genai.configure(api_key=api_key)
+    if not api_key:
+        return "Gemini API key is missing."
 
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    client = genai.Client(api_key=api_key)
+
     prompt = f"""You are a friendly teacher. Explain the following topic in very simple, 
     easy-to-understand terms for a student. Use analogies and examples where helpful.
     
     Topic: {topic}"""
 
-    response = model.generate_content(prompt,
-        generation_config=genai.types.GenerationConfig(
+    response = client.models.generate_content(
+        model="gemini-2.5-flash",
+        contents=prompt,
+        config=genai.types.GenerateContentConfig(
             temperature=0.7
         )
     )

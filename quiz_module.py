@@ -1,15 +1,16 @@
 import os
 import json
 import functools
-import google.generativeai as genai
+from google import genai
 
 # extracting the api key from the .env file
 api_key = os.getenv("GOOGLE_API_KEY")
 
-# configuring the genai
+# configuring the genai client
 if api_key:
-    genai.configure(api_key=api_key)
+    client = genai.Client(api_key=api_key)
 else:
+    client = None
     print("Gemini API not configured. GOOGLE_API_KEY environment variable not found.")
 
 # main function
@@ -21,8 +22,8 @@ def generate_quiz(topic: str, num_questions: int = 5, difficulty: str = "Easy") 
         return {"error": "Please provide a topic to generate a quiz."}
 
     try:
-        # initializing the model - used gemini 2.5 flash model
-        model = genai.GenerativeModel("gemini-2.0-flash")
+        if not client:
+            return {"error": "Gemini API key is missing."}
 
         # prompt for structured quiz generation
         prompt = f"""
@@ -55,8 +56,10 @@ def generate_quiz(topic: str, num_questions: int = 5, difficulty: str = "Easy") 
         """
 
         # obtaining the response - temp = 0.7
-        response = model.generate_content(prompt,
-            generation_config=genai.types.GenerationConfig(
+        response = client.models.generate_content(
+            model="gemini-2.5-flash",
+            contents=prompt,
+            config=genai.types.GenerateContentConfig(
                 temperature=0.7
             )
         )
