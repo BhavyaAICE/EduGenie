@@ -51,7 +51,7 @@ def _explain_with_gemini(topic: str) -> str:
     if api_key:
         genai.configure(api_key=api_key)
 
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    model = genai.GenerativeModel("gemini-2.0-flash")
     prompt = f"""You are a friendly teacher. Explain the following topic in very simple, 
     easy-to-understand terms for a student. Use analogies and examples where helpful.
     
