@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EduGenie — Minimalist AI Academic Studio</title>
-    <link rel="stylesheet" href="/static/style.css?v=minimalist">
+    <link rel="stylesheet" href="/static/style.css?v=light2">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -68,7 +68,7 @@
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="hero-eyebrow">
+                        <div class="hero-eyebrow eyebrow-blue">
                             <i class="fa-solid fa-bolt"></i> Conceptual Synthesis
                         </div>
                         <h1>Concept <em>Explainer</em></h1>
@@ -77,21 +77,21 @@
                         <div class="starter-bento">
                             <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Quantum Entanglement')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Physics</span>
+                                    <span class="bento-tag tag-blue">Physics</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Quantum Entanglement & Non-Locality</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Recursion in Computer Science')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Computer Science</span>
+                                    <span class="bento-tag tag-purple">Computer Science</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Recursion & Call Stack Mechanics</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(Explainer, 'CRISPR Gene Editing')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Biotechnology</span>
+                                    <span class="bento-tag tag-emerald">Biotechnology</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>CRISPR Cas9 Molecular Mechanism</h3>
@@ -128,7 +128,7 @@
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="hero-eyebrow">
+                        <div class="hero-eyebrow eyebrow-purple">
                             <i class="fa-solid fa-comment-dots"></i> Direct Inquiry
                         </div>
                         <h1>Academic <em>QnA Hub</em></h1>
@@ -137,21 +137,21 @@
                         <div class="starter-bento">
                             <div class="bento-card" onclick="useStarterPrompt(QnA, 'Why does ice float on liquid water?')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Thermodynamics</span>
+                                    <span class="bento-tag tag-amber">Thermodynamics</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Why does ice float on liquid water?</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(QnA, 'What causes gravity according to general relativity?')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Astrophysics</span>
+                                    <span class="bento-tag tag-blue">Astrophysics</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Spacetime curvature vs. Newtonian gravity</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(QnA, 'How do neural networks learn through backpropagation?')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Deep Learning</span>
+                                    <span class="bento-tag tag-purple">Deep Learning</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Backpropagation & Matrix Chain Rule</h3>
@@ -188,7 +188,7 @@
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="hero-eyebrow">
+                        <div class="hero-eyebrow eyebrow-emerald">
                             <i class="fa-solid fa-compress"></i> Document Condenser
                         </div>
                         <h1>Document <em>Summarizer</em></h1>
@@ -197,21 +197,21 @@
                         <div class="starter-bento">
                             <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Explain Retrieval-Augmented Generation (RAG), how it works, and why it is useful...')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">AI Architecture</span>
+                                    <span class="bento-tag tag-blue">AI Architecture</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Retrieval-Augmented Generation (RAG)</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Summarize the core principles of Quantum Computing in simple terms.')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Computation</span>
+                                    <span class="bento-tag tag-amber">Computation</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Quantum Superposition & Qubit Circuits</h3>
                             </div>
                             <div class="bento-card" onclick="useStarterPrompt(summarizer, 'What are the main differences between supervised, unsupervised, and reinforcement learning?')">
                                 <div class="bento-header">
-                                    <span class="bento-tag">Machine Learning</span>
+                                    <span class="bento-tag tag-emerald">Machine Learning</span>
                                     <span class="bento-arrow">↗</span>
                                 </div>
                                 <h3>Paradigms: Supervised vs. RL Policies</h3>
@@ -256,7 +256,7 @@
         <section class="section-view scroll-section Quiz" id="Quiz">
             <div class="content-container">
                 <div class="welcome-hero" style="margin: 20px 0 32px 0;">
-                    <div class="hero-eyebrow">
+                    <div class="hero-eyebrow eyebrow-amber">
                         <i class="fa-solid fa-check-double"></i> Knowledge Verification
                     </div>
                     <h1>Assessment <em>Engine</em></h1>
@@ -325,7 +325,7 @@
         <section class="section-view scroll-section roadmap" id="roadmap">
             <div class="content-container">
                 <div class="welcome-hero" style="margin: 20px 0 32px 0;">
-                    <div class="hero-eyebrow">
+                    <div class="hero-eyebrow eyebrow-rose">
                         <i class="fa-solid fa-map-location-dot"></i> Structured Mastery
                     </div>
                     <h1>Curriculum <em>Roadmap</em></h1>
