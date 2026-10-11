@@ -4,90 +4,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduGenie AI - AI-Powered Educational Assistant</title>
-    <link rel="stylesheet" href="/static/style.css?v=3">
+    <title>EduGenie — Minimalist AI Academic Studio</title>
+    <link rel="stylesheet" href="/static/style.css?v=minimalist">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- ─── Header ─── -->
+    <!-- ─── Minimalist Header ─── -->
     <header>
         <div class="logo">
             <div class="logo-icon">
                 <i class="fa-solid fa-brain"></i>
             </div>
-            <div>
-                <h2>EduGenie AI</h2>
-                <span>LEARN FASTER</span>
+            <div class="logo-meta">
+                <h2>EduGenie</h2>
+                <span>Studio · v2.5</span>
             </div>
         </div>
 
         <div class="header-status">
-            <span class="dot"></span>
-            <span>Gemini 2.5 Active</span>
+            <span class="status-dot"></span>
+            <span>GEMINI-2.5-FLASH</span>
         </div>
     </header>
 
-    <!-- ─── Tab Navigation ─── -->
+    <!-- ─── Segmented Workspace Navigation ─── -->
     <nav>
         <button class="active" id="explainerName">
-            <i class="fa-regular fa-lightbulb"></i>
+            <i class="fa-solid fa-lightbulb"></i>
             Explainer
         </button>
 
         <button id="QnAName">
-            <i class="fa-regular fa-comment"></i>
+            <i class="fa-solid fa-message"></i>
             QnA Hub
         </button>
 
         <button id="summarizerName">
-            <i class="fa-regular fa-file-lines"></i>
+            <i class="fa-solid fa-file-lines"></i>
             Summarizer
         </button>
 
         <button id="quizName">
-            <i class="fa-solid fa-circle-dot"></i>
-            Quiz
+            <i class="fa-solid fa-list-check"></i>
+            Quiz Engine
         </button>
 
         <button id="roadmapName">
-            <i class="fa-regular fa-map"></i>
-            Roadmap
+            <i class="fa-solid fa-compass"></i>
+            Curriculum
         </button>
     </nav>
 
     <!-- ─── Main Viewport ─── -->
     <main class="main-viewport">
 
-        <!-- 1. Explainer Section -->
+        <!-- 1. Explainer View -->
         <section class="section-view chat-section Explainer active" id="Explainer">
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="icon-circle">
-                            <i class="fa-regular fa-lightbulb"></i>
+                        <div class="hero-eyebrow">
+                            <i class="fa-solid fa-bolt"></i> Conceptual Synthesis
                         </div>
-                        <div class="welcome-hero-text">
-                            <div>
-                                <h1>Concept Explainer</h1>
-                                <p class="subline">Get a plain-language breakdown of any complex topic instantly.</p>
+                        <h1>Concept <em>Explainer</em></h1>
+                        <p class="subline">Get rigorous, plain-language breakdowns of complex ideas and academic theorems.</p>
+                        
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Quantum Entanglement')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Physics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Quantum Entanglement & Non-Locality</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Recursion in Computer Science')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Computer Science</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Recursion & Call Stack Mechanics</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'CRISPR Gene Editing')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Biotechnology</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>CRISPR Cas9 Molecular Mechanism</h3>
                             </div>
                         </div>
-                        <div class="starter-chips">
-                            <button class="chip" onclick="useStarterPrompt(Explainer, 'Quantum Entanglement')">
-                                <i class="fa-solid fa-bolt"></i> Quantum Entanglement
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(Explainer, 'Recursion in Computer Science')">
-                                <i class="fa-solid fa-code"></i> Recursion in Computer Science
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(Explainer, 'CRISPR Gene Editing')">
-                                <i class="fa-solid fa-dna"></i> CRISPR Gene Editing
-                            </button>
-                        </div>
+
                         <button class="clear-chat-btn" onclick="clearChat(Explainer)">
-                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
                         </button>
                     </div>
 
@@ -98,44 +110,56 @@
             <div class="chat-input-dock">
                 <div class="dock-inner">
                     <div class="input-card">
-                        <input type="text" class="chat-input" placeholder="e.g. quantum entanglement, recursion, photosynthesis...">
-                        <button type="button" class="send-btn" title="Explain Concept">
-                            <span>Explain</span>
-                            <i class="fa-solid fa-arrow-up"></i>
-                        </button>
+                        <input type="text" class="chat-input" placeholder="Enter topic to dissect (e.g. quantum entanglement, transformers, game theory)...">
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Explain Concept">
+                                <span>Explain</span>
+                            </button>
+                        </div>
                     </div>
-                    <small class="disclaimer">Built with EduGenie AI · Clear explanations tailored to you</small>
+                    <small class="disclaimer">Structured analytical explanations · Academic reference tool</small>
                 </div>
             </div>
         </section>
 
-        <!-- 2. QnA Hub Section -->
+        <!-- 2. QnA Hub View -->
         <section class="section-view chat-section QnA" id="QnA">
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="icon-circle">
-                            <i class="fa-regular fa-comment"></i>
+                        <div class="hero-eyebrow">
+                            <i class="fa-solid fa-comment-dots"></i> Direct Inquiry
                         </div>
-                        <div class="welcome-hero-text">
-                            <div>
-                                <h1>QnA Hub</h1>
-                                <p class="subline">Ask anything educational. Get clear, accurate answers with deep insights.</p>
+                        <h1>Academic <em>QnA Hub</em></h1>
+                        <p class="subline">Direct inquiry for scientific concepts, historical context, and technical mechanisms.</p>
+
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'Why does ice float on liquid water?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Thermodynamics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Why does ice float on liquid water?</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'What causes gravity according to general relativity?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Astrophysics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Spacetime curvature vs. Newtonian gravity</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'How do neural networks learn through backpropagation?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Deep Learning</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Backpropagation & Matrix Chain Rule</h3>
                             </div>
                         </div>
-                        <div class="starter-chips">
-                            <button class="chip" onclick="useStarterPrompt(QnA, 'Why does ice float on liquid water?')">
-                                <i class="fa-solid fa-question"></i> Why does ice float?
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(QnA, 'What causes gravity according to general relativity?')">
-                                <i class="fa-solid fa-globe"></i> General Relativity & Gravity
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(QnA, 'How do neural networks learn through backpropagation?')">
-                                <i class="fa-solid fa-network-wired"></i> Backpropagation Explained
-                            </button>
-                        </div>
+
                         <button class="clear-chat-btn" onclick="clearChat(QnA)">
-                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
                         </button>
                     </div>
 
@@ -146,44 +170,56 @@
             <div class="chat-input-dock">
                 <div class="dock-inner">
                     <div class="input-card">
-                        <input type="text" class="chat-input" placeholder="Ask your question...">
-                        <button type="button" class="send-btn" title="Ask AI">
-                            <span>Ask AI</span>
-                            <i class="fa-solid fa-arrow-up"></i>
-                        </button>
+                        <input type="text" class="chat-input" placeholder="Pose a technical or academic question...">
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Ask AI">
+                                <span>Inquire</span>
+                            </button>
+                        </div>
                     </div>
-                    <small class="disclaimer">Built with EduGenie AI · Accurate knowledge at your fingertips</small>
+                    <small class="disclaimer">Direct educational verification · Grounded responses</small>
                 </div>
             </div>
         </section>
 
-        <!-- 3. Summarizer Section -->
+        <!-- 3. Summarizer View -->
         <section class="section-view chat-section summarizer" id="summarizer">
             <div class="chat-scroll-area">
                 <div class="chat-column">
                     <div class="welcome-hero">
-                        <div class="icon-circle">
-                            <i class="fa-regular fa-file-lines"></i>
+                        <div class="hero-eyebrow">
+                            <i class="fa-solid fa-compress"></i> Document Condenser
                         </div>
-                        <div class="welcome-hero-text">
-                            <div>
-                                <h1>Summarizer</h1>
-                                <p class="subline">Summarize long texts, articles, or complex notes into clear, concise insights.</p>
+                        <h1>Document <em>Summarizer</em></h1>
+                        <p class="subline">Condense dense literature, research publications, or complex notes into high-signal analytical briefs.</p>
+
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Explain Retrieval-Augmented Generation (RAG), how it works, and why it is useful...')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">AI Architecture</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Retrieval-Augmented Generation (RAG)</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Summarize the core principles of Quantum Computing in simple terms.')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Computation</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Quantum Superposition & Qubit Circuits</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'What are the main differences between supervised, unsupervised, and reinforcement learning?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag">Machine Learning</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Paradigms: Supervised vs. RL Policies</h3>
                             </div>
                         </div>
-                        <div class="starter-chips">
-                            <button class="chip" onclick="useStarterPrompt(summarizer, 'Explain Retrieval-Augmented Generation (RAG), how it works, and why it is useful...')">
-                                <i class="fa-solid fa-wand-magic-sparkles"></i> Explain RAG & Why it's useful
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(summarizer, 'Summarize the core principles of Quantum Computing in simple terms.')">
-                                <i class="fa-solid fa-atom"></i> Quantum Computing core principles
-                            </button>
-                            <button class="chip" onclick="useStarterPrompt(summarizer, 'What are the main differences between supervised, unsupervised, and reinforcement learning?')">
-                                <i class="fa-solid fa-brain"></i> Machine Learning paradigms
-                            </button>
-                        </div>
+
                         <button class="clear-chat-btn" onclick="clearChat(summarizer)">
-                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
                         </button>
                     </div>
 
@@ -193,63 +229,65 @@
 
             <div class="chat-input-dock">
                 <div class="dock-inner">
-                    <div class="length-selector">
-                        <span class="length-label"><i class="fa-solid fa-sliders"></i> Summary Length:</span>
-                        <div class="length-pills">
-                            <button type="button" class="length-pill" data-length="Short">⚡ Short</button>
-                            <button type="button" class="length-pill active" data-length="medium">📝 Medium</button>
-                            <button type="button" class="length-pill" data-length="Detailed">🔍 Detailed</button>
+                    <div class="depth-control">
+                        <span class="control-label">BRIEF DEPTH</span>
+                        <div class="segmented-group">
+                            <button type="button" class="segmented-btn" data-length="Short">Executive</button>
+                            <button type="button" class="segmented-btn active" data-length="medium">Balanced</button>
+                            <button type="button" class="segmented-btn" data-length="Detailed">In-Depth</button>
                         </div>
                     </div>
+                    
                     <div class="input-card">
-                        <textarea class="chat-input summarizer-input" placeholder="Paste your text or ask a question to summarize..." rows="2"></textarea>
-                        <button type="button" class="send-btn" title="Summarize">
-                            <span>Summarize</span>
-                            <i class="fa-solid fa-arrow-up"></i>
-                        </button>
+                        <textarea class="chat-input summarizer-input" placeholder="Paste source passage or prompt to condense..." rows="2"></textarea>
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Generate Summary">
+                                <span>Summarize</span>
+                            </button>
+                        </div>
                     </div>
-                    <small class="disclaimer">Built with EduGenie AI · Tailored summaries powered by Gemini</small>
+                    <small class="disclaimer">High-density summary briefs · Formatted for fast retention</small>
                 </div>
             </div>
         </section>
 
-        <!-- 4. Quiz Section -->
+        <!-- 4. Quiz View -->
         <section class="section-view scroll-section Quiz" id="Quiz">
             <div class="content-container">
-                <div class="icon-circle">
-                    <i class="fa-solid fa-circle-dot"></i>
-                </div>
-
-                <div class="welcome-hero" style="margin: 0; padding: 0 0 20px 0;">
-                    <h1>Quiz Generator</h1>
-                    <p class="subline">Test and reinforce your knowledge with interactive, AI-crafted quizzes.</p>
+                <div class="welcome-hero" style="margin: 20px 0 32px 0;">
+                    <div class="hero-eyebrow">
+                        <i class="fa-solid fa-check-double"></i> Knowledge Verification
+                    </div>
+                    <h1>Assessment <em>Engine</em></h1>
+                    <p class="subline">Interactive evaluation suite designed to test conceptual understanding and recall.</p>
                 </div>
 
                 <div class="QuizGenerator">
                     <!-- Step 1: Quiz Settings -->
                     <form class="quizSetting" id="quizSettingsForm">
-                        <h2>Quiz Settings</h2>
+                        <h2>Assessment Configuration</h2>
 
                         <div class="quizSettingTopic">
-                            <label>Topic</label>
-                            <input type="text" id="quizTopicInput" placeholder="e.g. Photosynthesis, World War II, Calculus" required>
+                            <label>Domain or Topic</label>
+                            <input type="text" id="quizTopicInput" placeholder="e.g. Distributed Systems, Neural Architecture, Calculus" required>
                         </div>
 
                         <div class="quizSettingTopic">
-                            <label>Difficulty</label>
+                            <label>Target Rigor</label>
                             <select id="quizDifficultySelect" required>
-                                <option value="Easy">Easy</option>
-                                <option value="Medium">Medium</option>
-                                <option value="Hard">Hard</option>
+                                <option value="Easy">Foundational (Easy)</option>
+                                <option value="Medium" selected>Standard (Medium)</option>
+                                <option value="Hard">Advanced (Hard)</option>
                             </select>
                         </div>
 
                         <div class="quizSettingTopic">
-                            <label>Number of Questions</label>
+                            <label>Question Quantity</label>
                             <input type="number" id="quizNumInput" min="1" max="20" value="5" required>
                         </div>
 
-                        <button type="submit" id="quizGenerateBtn">Generate Quiz</button>
+                        <button type="submit" id="quizGenerateBtn">Construct Assessment</button>
                     </form>
 
                     <!-- Step 2: Question Display -->
@@ -268,7 +306,7 @@
                     <!-- Step 3: Results -->
                     <div id="quizResults" style="display:none;">
                         <div class="quiz-score-display">
-                            <h2>Quiz Complete!</h2>
+                            <h2>Assessment Complete</h2>
                             <div class="quiz-score-circle" id="quizScoreCircle">
                                 <span id="quizScoreText">0/5</span>
                             </div>
@@ -277,33 +315,32 @@
 
                         <div class="quiz-review" id="quizReview"></div>
 
-                        <button class="quiz-restart-btn" id="quizRestartBtn">Take Another Quiz</button>
+                        <button class="quiz-restart-btn" id="quizRestartBtn">Generate Another Assessment</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Roadmap Section -->
+        <!-- 5. Curriculum / Roadmap View -->
         <section class="section-view scroll-section roadmap" id="roadmap">
             <div class="content-container">
-                <div class="icon-circle">
-                    <i class="fa-regular fa-map"></i>
-                </div>
-
-                <div class="welcome-hero" style="margin: 0; padding: 0 0 24px 0;">
-                    <h1>Learning Roadmap</h1>
-                    <p class="subline">Generate a structured, step-by-step learning path tailored to your skill level.</p>
+                <div class="welcome-hero" style="margin: 20px 0 32px 0;">
+                    <div class="hero-eyebrow">
+                        <i class="fa-solid fa-map-location-dot"></i> Structured Mastery
+                    </div>
+                    <h1>Curriculum <em>Roadmap</em></h1>
+                    <p class="subline">Generate step-by-step master syllabi from foundational principles to advanced mastery.</p>
                 </div>
 
                 <div class="roadmap-controls">
                     <div class="roadmap-search">
-                        <input type="text" id="roadmapTopicInput" placeholder="e.g. Machine Learning, Full-Stack React, Quantum Physics...">
+                        <input type="text" id="roadmapTopicInput" placeholder="e.g. Machine Learning, Compilers, Distributed Consensus...">
                         <select id="roadmapLevelSelect" class="roadmap-level">
                             <option value="beginner">Beginner</option>
-                            <option value="intermediate">Intermediate</option>
+                            <option value="intermediate" selected>Intermediate</option>
                             <option value="advanced">Advanced</option>
                         </select>
-                        <button id="roadmapGenerateBtn">Get Roadmap</button>
+                        <button id="roadmapGenerateBtn">Build Path</button>
                     </div>
                 </div>
 
@@ -317,7 +354,7 @@
 
     </main>
 
-    <!-- ─── Scripts ─── -->
+    <!-- ─── Core Application Logic ─── -->
     <script>
         // ─── Section References ───
         const explainerBtn = document.getElementById("explainerName");
@@ -356,7 +393,7 @@
             return div.innerHTML;
         }
 
-        // ─── Robust Markdown to HTML Converter ───
+        // ─── Robust Document Markdown Parser ───
         function markdownToHtml(text) {
             if (!text) return '';
             let html = text;
@@ -364,11 +401,11 @@
             // Escape HTML entities safely
             html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-            // Multi-line code blocks ```code```
+            // Multi-line code blocks
             html = html.replace(/```(?:[a-zA-Z0-9]+)?\n([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
             html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
 
-            // Inline code `code`
+            // Inline code
             html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
 
             // Horizontal rules
@@ -396,7 +433,7 @@
             html = html.replace(/\n/g, '<br>');
             html = '<p>' + html + '</p>';
 
-            // Clean up empty paragraphs & bad wrappers
+            // Clean up empty paragraphs
             html = html.replace(/<p>\s*<\/p>/g, '');
             html = html.replace(/<p>\s*(<(?:ul|ol|pre|hr|h1|h2|h3)>)/g, '$1');
             html = html.replace(/(<\/(?:ul|ol|pre|hr|h1|h2|h3)>)\s*<\/p>/g, '$1');
@@ -404,7 +441,7 @@
             return html;
         }
 
-        // ─── Add Message to Chat Feed (ChatGPT / Claude Style) ───
+        // ─── Add Message to Chat Feed (Editorial Document Style) ───
         let messageCounter = 0;
         function addToChatFeed(section, question, answer) {
             const feed = section.querySelector('.chat-feed-container');
@@ -420,22 +457,20 @@
             `;
             feed.appendChild(userMsg);
 
-            // 2. Add AI Message
+            // 2. Add AI Response Card
             messageCounter++;
             const msgId = `ai-msg-body-${messageCounter}`;
             const aiMsg = document.createElement('div');
             aiMsg.className = 'chat-message ai-message';
             aiMsg.innerHTML = `
-                <div class="message-avatar">
-                    <i class="fa-solid fa-brain"></i>
-                </div>
+                <div class="ai-avatar-mark">EG</div>
                 <div class="message-wrapper">
                     <div class="message-content" id="${msgId}">
                         ${markdownToHtml(answer)}
                     </div>
                     <div class="message-actions">
                         <button type="button" class="action-btn copy-btn" onclick="copyMessage('${msgId}', this)">
-                            <i class="fa-regular fa-copy"></i> Copy
+                            <i class="fa-regular fa-copy"></i> Copy Brief
                         </button>
                     </div>
                 </div>
@@ -448,7 +483,7 @@
             }, 60);
         }
 
-        // ─── Copy AI Response ───
+        // ─── Copy Document Action ───
         async function copyMessage(elementId, btn) {
             const el = document.getElementById(elementId);
             if (!el) return;
@@ -456,9 +491,9 @@
             try {
                 await navigator.clipboard.writeText(text);
                 const originalHtml = btn.innerHTML;
-                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                btn.style.color = '#22c55e';
-                btn.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                btn.style.color = 'var(--accent-sage)';
+                btn.style.borderColor = 'rgba(147, 183, 162, 0.4)';
                 setTimeout(() => {
                     btn.innerHTML = originalHtml;
                     btn.style.color = '';
@@ -469,14 +504,14 @@
             }
         }
 
-        // ─── Clear / New Chat ───
+        // ─── Clear / Reset Thread ───
         function clearChat(section) {
             const feed = section.querySelector('.chat-feed-container');
             if (feed) feed.innerHTML = '';
             section.classList.remove('has-messages');
         }
 
-        // ─── Starter Prompt Chips ───
+        // ─── Starter Prompt Bento ───
         function useStarterPrompt(section, text) {
             const input = section.querySelector('.chat-input');
             const submitBtn = section.querySelector('.send-btn');
@@ -490,7 +525,7 @@
         async function callAPI(url, body, section, inputEl, question) {
             const btn = section.querySelector('.send-btn');
             const originalContent = btn.innerHTML;
-            btn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Thinking...';
+            btn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Synthesizing...';
             btn.disabled = true;
             if (inputEl) inputEl.disabled = true;
 
@@ -521,7 +556,7 @@
 
         function triggerExplainer() {
             const topic = explainerInput.value.trim();
-            if (!topic) return alert('Please enter a topic to explain.');
+            if (!topic) return alert('Please enter a concept to explain.');
             callAPI('/explain', { topic: topic }, Explainer, explainerInput, topic);
         }
 
@@ -556,18 +591,18 @@
         const summarizerSubmit = summarizer.querySelector('.send-btn');
         let currentSummaryLength = 'medium';
 
-        // Length selector pills
-        document.querySelectorAll('.length-pill').forEach(pill => {
-            pill.addEventListener('click', () => {
-                document.querySelectorAll('.length-pill').forEach(p => p.classList.remove('active'));
-                pill.classList.add('active');
-                currentSummaryLength = pill.dataset.length || 'medium';
+        // Depth control segmented buttons
+        document.querySelectorAll('.segmented-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.segmented-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSummaryLength = btn.dataset.length || 'medium';
             });
         });
 
         function triggerSummarizer() {
             const text = summarizerInput.value.trim();
-            if (!text) return alert('Please enter text to summarize.');
+            if (!text) return alert('Please enter text or a query to summarize.');
             const displayQuestion = text.length > 90 ? text.substring(0, 90) + '...' : text;
             callAPI('/summarize', { text: text, length: currentSummaryLength }, summarizer, summarizerInput, displayQuestion);
         }
@@ -580,7 +615,7 @@
             }
         });
 
-        // ─── 4. Interactive Quiz System ───
+        // ─── 4. Quiz Engine Setup ───
         let quizData = [];
         let currentQ = 0;
         let userAnswers = [];
@@ -635,7 +670,7 @@
             } catch (error) {
                 alert('Error generating quiz: ' + error.message);
             } finally {
-                quizGenerateBtn.textContent = 'Generate Quiz';
+                quizGenerateBtn.textContent = 'Construct Assessment';
                 quizGenerateBtn.disabled = false;
             }
         });
@@ -701,21 +736,21 @@
             quizScoreText.textContent = `${quizScore}/${total}`;
             quizProgressBar.style.width = '100%';
 
-            if (pct >= 80) quizScoreMessage.textContent = '🎉 Excellent! You nailed it!';
-            else if (pct >= 60) quizScoreMessage.textContent = '👍 Good job! Keep learning!';
-            else if (pct >= 40) quizScoreMessage.textContent = '📚 Not bad, but review the topics.';
-            else quizScoreMessage.textContent = '💪 Keep studying, you\'ll improve!';
+            if (pct >= 80) quizScoreMessage.textContent = 'High Mastery: Exceptional conceptual retention.';
+            else if (pct >= 60) quizScoreMessage.textContent = 'Solid Grasp: Good conceptual foundation.';
+            else if (pct >= 40) quizScoreMessage.textContent = 'Review Recommended: Revisit foundational sections.';
+            else quizScoreMessage.textContent = 'Active Study Required: Re-read core explanations.';
 
             let reviewHTML = '<h3>Answer Review</h3>';
             quizData.forEach((q, i) => {
                 const ua = userAnswers[i];
-                const icon = ua.isCorrect ? '✅' : '❌';
+                const icon = ua.isCorrect ? '✓' : '✗';
                 reviewHTML += `
                     <div class="quiz-review-item ${ua.isCorrect ? 'review-correct' : 'review-wrong'}">
-                        <p class="review-q">${icon} <strong>Q${i + 1}:</strong> ${q.question}</p>
+                        <p class="review-q"><strong>${icon} Q${i + 1}:</strong> ${q.question}</p>
                         <p class="review-answer">Your answer: <strong>${ua.selected}</strong> — ${q.options[ua.selected]}</p>
                         ${!ua.isCorrect ? `<p class="review-correct-answer">Correct answer: <strong>${ua.correct}</strong> — ${q.options[ua.correct]}</p>` : ''}
-                        <p class="review-explanation">💡 ${q.explanation}</p>
+                        <p class="review-explanation">Rationale: ${q.explanation}</p>
                     </div>
                 `;
             });
@@ -728,7 +763,7 @@
             quizSettingsForm.style.display = 'flex';
         });
 
-        // ─── 5. Roadmap Setup ───
+        // ─── 5. Curriculum Roadmap Setup ───
         const roadmapTopicInput = document.getElementById('roadmapTopicInput');
         const roadmapLevelSelect = document.getElementById('roadmapLevelSelect');
         const roadmapGenerateBtn = document.getElementById('roadmapGenerateBtn');
@@ -738,16 +773,16 @@
         roadmapGenerateBtn.addEventListener('click', async () => {
             const topic = roadmapTopicInput.value.trim();
             const level = roadmapLevelSelect.value;
-            if (!topic) return alert('Please enter a topic for your roadmap.');
+            if (!topic) return alert('Please enter a topic for your curriculum.');
 
-            roadmapGenerateBtn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Generating...';
+            roadmapGenerateBtn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Building...';
             roadmapGenerateBtn.disabled = true;
             roadmapTopicInput.disabled = true;
             roadmapLevelSelect.disabled = true;
 
             roadmapTimelineContainer.style.display = 'none';
             roadmapStatusMessage.style.display = 'block';
-            roadmapStatusMessage.innerHTML = '<p>✨ Plotting your learning journey...</p>';
+            roadmapStatusMessage.innerHTML = '<p>Synthesizing curriculum structure...</p>';
 
             try {
                 const response = await fetch('/learn/recommendations', {
@@ -759,14 +794,14 @@
                 const result = data.response;
 
                 if (result.error) {
-                    roadmapStatusMessage.innerHTML = `<p class="error-text">❌ ${result.error}</p>`;
+                    roadmapStatusMessage.innerHTML = `<p class="error-text">Error: ${result.error}</p>`;
                     return;
                 }
 
                 roadmapStatusMessage.style.display = 'none';
                 let timelineHTML = `
                     <div class="roadmap-header">
-                        <h2>Your Path to Mastering ${result.topic || topic}</h2>
+                        <h2>Curriculum: ${result.topic || topic}</h2>
                         <span class="roadmap-badge">${result.level || level}</span>
                     </div>
                 `;
@@ -774,7 +809,7 @@
                 if (result.roadmap && Array.isArray(result.roadmap)) {
                     result.roadmap.forEach((phase, index) => {
                         let topicsHTML = phase.topics ? phase.topics.map(t => `<li>${t}</li>`).join('') : '';
-                        let resourcesHTML = phase.resources ? phase.resources.map(r => `<li><i class="fa-solid fa-link"></i> ${r}</li>`).join('') : '';
+                        let resourcesHTML = phase.resources ? phase.resources.map(r => `<li><i class="fa-solid fa-arrow-up-right-from-square"></i> ${r}</li>`).join('') : '';
 
                         timelineHTML += `
                             <div class="timeline-step">
@@ -789,13 +824,13 @@
                                     <div class="timeline-details">
                                         ${topicsHTML ? `
                                         <div class="detail-box">
-                                            <h4>Key Concepts</h4>
+                                            <h4>Core Competencies</h4>
                                             <ul>${topicsHTML}</ul>
                                         </div>` : ''}
                                         
                                         ${resourcesHTML ? `
                                         <div class="detail-box">
-                                            <h4>Resources</h4>
+                                            <h4>Recommended References</h4>
                                             <ul class="resource-list">${resourcesHTML}</ul>
                                         </div>` : ''}
                                     </div>
@@ -804,16 +839,16 @@
                         `;
                     });
                 } else {
-                    timelineHTML += '<p>Failed to parse roadmap steps. Please try again.</p>';
+                    timelineHTML += '<p>Failed to parse curriculum steps. Please try again.</p>';
                 }
 
                 roadmapTimelineContainer.innerHTML = timelineHTML;
                 roadmapTimelineContainer.style.display = 'block';
 
             } catch (error) {
-                roadmapStatusMessage.innerHTML = `<p class="error-text">❌ Error generating roadmap: ${error.message}</p>`;
+                roadmapStatusMessage.innerHTML = `<p class="error-text">Error generating curriculum: ${error.message}</p>`;
             } finally {
-                roadmapGenerateBtn.textContent = 'Get Roadmap';
+                roadmapGenerateBtn.textContent = 'Build Path';
                 roadmapGenerateBtn.disabled = false;
                 roadmapTopicInput.disabled = false;
                 roadmapLevelSelect.disabled = false;

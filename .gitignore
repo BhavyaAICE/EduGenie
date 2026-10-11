@@ -17,3 +17,5 @@ Screenshot*.png
 
 # Documentation PDFs (not needed for deployment)
 *.pdf
+
+.aider-desk/
