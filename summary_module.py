@@ -15,7 +15,7 @@ import functools
 
 # main function
 @functools.lru_cache(maxsize=100)
-def get_summary(text: str) -> str:
+def get_summary(text: str, length: str = "medium") -> str:
 
     # if no text is provided - edge case
     if not text.strip():
@@ -26,11 +26,23 @@ def get_summary(text: str) -> str:
         if not client:
             return "Gemini API key is missing."
 
+        length_guides = {
+            "short": "Provide a very concise summary (around 3-5 punchy bullet points) capturing only the core takeaways for fast revision.",
+            "medium": "Provide a balanced, structured summary with key concepts, bullet points, and brief explanations.",
+            "detailed": "Provide an in-depth, thorough summary covering all nuances, mechanisms, terminology, and key takeaways with clean section headers and bullet points."
+        }
+        guide = length_guides.get(str(length).lower(), length_guides["medium"])
+
         # prompt for summary generation
         prompt = f"""
-            You are an expert educational assistant. Summarize the following long paragraphs into a concise, easy-to-understand version, making it ideal for quick revision. Ensure the core information is retained while eliminating redundancy. Format the output using clear, clean bullet points where appropriate.
+            You are an expert educational assistant. Summarize the following educational text according to this guideline:
+            {guide}
 
-            Text to summarize:{text}
+            Format your response cleanly using markdown (bold key terms, clean bullet points, clear headings where appropriate).
+            Avoid unnecessary intro/outro filler.
+
+            Text to summarize:
+            {text}
         """
 
         # obtaining the response - temp = 0.5

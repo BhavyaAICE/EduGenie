@@ -48,6 +48,7 @@ class QuizRequest(BaseModel):
 
 class SummaryRequest(BaseModel):
     text: str
+    length: str = "medium"
 
 class LearningPathRequest(BaseModel):
     topic: str
@@ -86,7 +87,7 @@ def quiz_generation(request: QuizRequest):
 @app.post("/summarize")
 def summarize_text(request: SummaryRequest):
     """Summarize the provided educational text."""
-    result = get_summary(request.text)
+    result = get_summary(request.text, request.length)
     return {"response": result}
 
 

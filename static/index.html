@@ -4,35 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EduGenie AI</title>
-    <link rel="stylesheet" href="/static/style.css">
-
+    <title>EduGenie AI - AI-Powered Educational Assistant</title>
+    <link rel="stylesheet" href="/static/style.css?v=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
+    <!-- ─── Header ─── -->
     <header>
-
         <div class="logo">
             <div class="logo-icon">
                 <i class="fa-solid fa-brain"></i>
             </div>
-
             <div>
                 <h2>EduGenie AI</h2>
                 <span>LEARN FASTER</span>
             </div>
         </div>
+
+        <div class="header-status">
+            <span class="dot"></span>
+            <span>Gemini 2.5 Active</span>
+        </div>
     </header>
 
-
+    <!-- ─── Tab Navigation ─── -->
     <nav>
-
         <button class="active" id="explainerName">
             <i class="fa-regular fa-lightbulb"></i>
             Explainer
@@ -57,242 +56,268 @@
             <i class="fa-regular fa-map"></i>
             Roadmap
         </button>
-
     </nav>
 
-
-
-    <section class="hero Explainer" id="Explainer">
-
-
-
-        <div class="icon-circle">
-            <i class="fa-regular fa-lightbulb"></i>
-        </div>
-
-        <h1>Concept Explainer</h1>
-
-
-        <div class="subline">
-            <p>Get a plain-language breakdown of any topic, instantly.</p>
-        </div>
-
-        <div class="chat-feed-container"> </div>
-
-
-        <div class="search-box">
-
-            <input type="text" placeholder="e.g. quantum entanglement, recursion, photosynthesis...">
-
-            <button>
-                Explain Concept
-            </button>
-
-        </div>
-
-
-
-
-
-        <small>
-            Built with EduGenie AI · Demo responses are simulated
-        </small>
-
-    </section>
-
-
-
-    <section class="hero QnA" id="QnA">
-
-
-
-        <div class="icon-circle">
-            <i class="fa-regular fa-lightbulb"></i>
-        </div>
-
-        <h1>QnA hub</h1>
-
-
-        <div class="subLine">
-            <p>Ask anything.Get accurate answers.</p>
-        </div>
-
-        <div class="chat-feed-container"> </div>
-
-        <div class="search-box">
-
-            <input type="text" placeholder="Ask you question...">
-
-            <button>
-                Ask AI
-            </button>
-
-        </div>
-
-        <small>
-            Built with EduGenie AI · Demo responses are simulated
-        </small>
-
-    </section>
-
-
-    <section class="hero summarizer" id="summarizer">
-
-
-
-        <div class="icon-circle">
-            <i class="fa-regular fa-lightbulb"></i>
-        </div>
-
-        <h1>Summarizer</h1>
-
-        <div class="subLine">
-            <p>Summarize long text into clear, concise insights.</p>
-        </div>
-
-        <div class="chat-feed-container"> </div>
-
-        <div class="search-box">
-
-            <input type="text" placeholder="Ask you question...">
-
-
-        </div>
-
-        <div class="strength">
-            <p>Summary length: </p>
-
-            <div class="strengthEasy">
-                <input type="radio" name="strength" id="strength" class="Short">
-                <label for="Short">Short</label>
-            </div>
-
-            <div class="strengthEasy">
-                <input type="radio" name="strength" id="strength" class="medium">
-                <label for="medium">medium</label>
-            </div>
-
-            <div class="strengthEasy">
-                <input type="radio" name="strength" id="strength" class="Detailed">
-                <label for="Detailed">Detailed</label>
-            </div>
-
-            <button type="submit">Summarize</button>
-        </div>
-
-        <small>
-            Built with EduGenie AI · Demo responses are simulated
-        </small>
-
-    </section>
-
-
-    <section class="hero Quiz" id="Quiz">
-
-        <div class="icon-circle">
-            <i class="fa-regular fa-lightbulb"></i>
-        </div>
-
-        <h1>Quiz Generator</h1>
-
-        <div class="QuizGenerator">
-
-            <!-- Step 1: Quiz Settings -->
-            <form class="quizSetting" id="quizSettingsForm">
-                <h2>Quiz Settings</h2>
-
-                <div class="topic quizSettingTopic">
-                    <label>Topic</label>
-                    <input type="text" class="quizTopic" id="quizTopicInput" placeholder="e.g. Photosynthesis" required>
-                </div>
-
-                <div class="difficulty quizSettingTopic">
-                    <label>Difficulty</label>
-                    <select class="difficultyLevel" id="quizDifficultySelect" required>
-                        <option value="Easy">Easy</option>
-                        <option value="Medium">Medium</option>
-                        <option value="Hard">Hard</option>
-                    </select>
-                </div>
-
-                <div class="NoOfQuestion quizSettingTopic">
-                    <label>Number of Questions</label>
-                    <input type="number" id="quizNumInput" min="1" max="20" value="5" required>
-                </div>
-
-                <button type="submit" id="quizGenerateBtn">Generate Quiz</button>
-            </form>
-
-            <!-- Step 2: Question Display (hidden initially) -->
-            <div id="quizPlayArea" style="display:none;">
-                <div class="quiz-progress">
-                    <div class="quiz-progress-bar" id="quizProgressBar"></div>
-                </div>
-                <p class="quiz-counter" id="quizCounter">Question 1 / 5</p>
-
-                <div class="quiz-question-card">
-                    <h3 id="quizQuestionText"></h3>
-                    <div class="quiz-options" id="quizOptions"></div>
-                </div>
-            </div>
-
-            <!-- Step 3: Results (hidden initially) -->
-            <div id="quizResults" style="display:none;">
-                <div class="quiz-score-display">
-                    <h2>Quiz Complete!</h2>
-                    <div class="quiz-score-circle" id="quizScoreCircle">
-                        <span id="quizScoreText">0/5</span>
+    <!-- ─── Main Viewport ─── -->
+    <main class="main-viewport">
+
+        <!-- 1. Explainer Section -->
+        <section class="section-view chat-section Explainer active" id="Explainer">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="icon-circle">
+                            <i class="fa-regular fa-lightbulb"></i>
+                        </div>
+                        <div class="welcome-hero-text">
+                            <div>
+                                <h1>Concept Explainer</h1>
+                                <p class="subline">Get a plain-language breakdown of any complex topic instantly.</p>
+                            </div>
+                        </div>
+                        <div class="starter-chips">
+                            <button class="chip" onclick="useStarterPrompt(Explainer, 'Quantum Entanglement')">
+                                <i class="fa-solid fa-bolt"></i> Quantum Entanglement
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(Explainer, 'Recursion in Computer Science')">
+                                <i class="fa-solid fa-code"></i> Recursion in Computer Science
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(Explainer, 'CRISPR Gene Editing')">
+                                <i class="fa-solid fa-dna"></i> CRISPR Gene Editing
+                            </button>
+                        </div>
+                        <button class="clear-chat-btn" onclick="clearChat(Explainer)">
+                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                        </button>
                     </div>
-                    <p id="quizScoreMessage"></p>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="input-card">
+                        <input type="text" class="chat-input" placeholder="e.g. quantum entanglement, recursion, photosynthesis...">
+                        <button type="button" class="send-btn" title="Explain Concept">
+                            <span>Explain</span>
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                    <small class="disclaimer">Built with EduGenie AI · Clear explanations tailored to you</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. QnA Hub Section -->
+        <section class="section-view chat-section QnA" id="QnA">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="icon-circle">
+                            <i class="fa-regular fa-comment"></i>
+                        </div>
+                        <div class="welcome-hero-text">
+                            <div>
+                                <h1>QnA Hub</h1>
+                                <p class="subline">Ask anything educational. Get clear, accurate answers with deep insights.</p>
+                            </div>
+                        </div>
+                        <div class="starter-chips">
+                            <button class="chip" onclick="useStarterPrompt(QnA, 'Why does ice float on liquid water?')">
+                                <i class="fa-solid fa-question"></i> Why does ice float?
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(QnA, 'What causes gravity according to general relativity?')">
+                                <i class="fa-solid fa-globe"></i> General Relativity & Gravity
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(QnA, 'How do neural networks learn through backpropagation?')">
+                                <i class="fa-solid fa-network-wired"></i> Backpropagation Explained
+                            </button>
+                        </div>
+                        <button class="clear-chat-btn" onclick="clearChat(QnA)">
+                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                        </button>
+                    </div>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="input-card">
+                        <input type="text" class="chat-input" placeholder="Ask your question...">
+                        <button type="button" class="send-btn" title="Ask AI">
+                            <span>Ask AI</span>
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                    <small class="disclaimer">Built with EduGenie AI · Accurate knowledge at your fingertips</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Summarizer Section -->
+        <section class="section-view chat-section summarizer" id="summarizer">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="icon-circle">
+                            <i class="fa-regular fa-file-lines"></i>
+                        </div>
+                        <div class="welcome-hero-text">
+                            <div>
+                                <h1>Summarizer</h1>
+                                <p class="subline">Summarize long texts, articles, or complex notes into clear, concise insights.</p>
+                            </div>
+                        </div>
+                        <div class="starter-chips">
+                            <button class="chip" onclick="useStarterPrompt(summarizer, 'Explain Retrieval-Augmented Generation (RAG), how it works, and why it is useful...')">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Explain RAG & Why it's useful
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(summarizer, 'Summarize the core principles of Quantum Computing in simple terms.')">
+                                <i class="fa-solid fa-atom"></i> Quantum Computing core principles
+                            </button>
+                            <button class="chip" onclick="useStarterPrompt(summarizer, 'What are the main differences between supervised, unsupervised, and reinforcement learning?')">
+                                <i class="fa-solid fa-brain"></i> Machine Learning paradigms
+                            </button>
+                        </div>
+                        <button class="clear-chat-btn" onclick="clearChat(summarizer)">
+                            <i class="fa-solid fa-rotate-right"></i> New Chat
+                        </button>
+                    </div>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="length-selector">
+                        <span class="length-label"><i class="fa-solid fa-sliders"></i> Summary Length:</span>
+                        <div class="length-pills">
+                            <button type="button" class="length-pill" data-length="Short">⚡ Short</button>
+                            <button type="button" class="length-pill active" data-length="medium">📝 Medium</button>
+                            <button type="button" class="length-pill" data-length="Detailed">🔍 Detailed</button>
+                        </div>
+                    </div>
+                    <div class="input-card">
+                        <textarea class="chat-input summarizer-input" placeholder="Paste your text or ask a question to summarize..." rows="2"></textarea>
+                        <button type="button" class="send-btn" title="Summarize">
+                            <span>Summarize</span>
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
+                    </div>
+                    <small class="disclaimer">Built with EduGenie AI · Tailored summaries powered by Gemini</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Quiz Section -->
+        <section class="section-view scroll-section Quiz" id="Quiz">
+            <div class="content-container">
+                <div class="icon-circle">
+                    <i class="fa-solid fa-circle-dot"></i>
                 </div>
 
-                <div class="quiz-review" id="quizReview"></div>
+                <div class="welcome-hero" style="margin: 0; padding: 0 0 20px 0;">
+                    <h1>Quiz Generator</h1>
+                    <p class="subline">Test and reinforce your knowledge with interactive, AI-crafted quizzes.</p>
+                </div>
 
-                <button class="quiz-restart-btn" id="quizRestartBtn">Take Another Quiz</button>
+                <div class="QuizGenerator">
+                    <!-- Step 1: Quiz Settings -->
+                    <form class="quizSetting" id="quizSettingsForm">
+                        <h2>Quiz Settings</h2>
+
+                        <div class="quizSettingTopic">
+                            <label>Topic</label>
+                            <input type="text" id="quizTopicInput" placeholder="e.g. Photosynthesis, World War II, Calculus" required>
+                        </div>
+
+                        <div class="quizSettingTopic">
+                            <label>Difficulty</label>
+                            <select id="quizDifficultySelect" required>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                        </div>
+
+                        <div class="quizSettingTopic">
+                            <label>Number of Questions</label>
+                            <input type="number" id="quizNumInput" min="1" max="20" value="5" required>
+                        </div>
+
+                        <button type="submit" id="quizGenerateBtn">Generate Quiz</button>
+                    </form>
+
+                    <!-- Step 2: Question Display -->
+                    <div id="quizPlayArea" style="display:none;">
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+                        </div>
+                        <p class="quiz-counter" id="quizCounter">Question 1 / 5</p>
+
+                        <div class="quiz-question-card">
+                            <h3 id="quizQuestionText"></h3>
+                            <div class="quiz-options" id="quizOptions"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Results -->
+                    <div id="quizResults" style="display:none;">
+                        <div class="quiz-score-display">
+                            <h2>Quiz Complete!</h2>
+                            <div class="quiz-score-circle" id="quizScoreCircle">
+                                <span id="quizScoreText">0/5</span>
+                            </div>
+                            <p id="quizScoreMessage"></p>
+                        </div>
+
+                        <div class="quiz-review" id="quizReview"></div>
+
+                        <button class="quiz-restart-btn" id="quizRestartBtn">Take Another Quiz</button>
+                    </div>
+                </div>
             </div>
+        </section>
 
-        </div>
+        <!-- 5. Roadmap Section -->
+        <section class="section-view scroll-section roadmap" id="roadmap">
+            <div class="content-container">
+                <div class="icon-circle">
+                    <i class="fa-regular fa-map"></i>
+                </div>
 
-    </section>
+                <div class="welcome-hero" style="margin: 0; padding: 0 0 24px 0;">
+                    <h1>Learning Roadmap</h1>
+                    <p class="subline">Generate a structured, step-by-step learning path tailored to your skill level.</p>
+                </div>
 
+                <div class="roadmap-controls">
+                    <div class="roadmap-search">
+                        <input type="text" id="roadmapTopicInput" placeholder="e.g. Machine Learning, Full-Stack React, Quantum Physics...">
+                        <select id="roadmapLevelSelect" class="roadmap-level">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate">Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <button id="roadmapGenerateBtn">Get Roadmap</button>
+                    </div>
+                </div>
 
-    <section class="hero roadmap" id="roadmap">
+                <!-- Error / Loading Display -->
+                <div id="roadmapStatusMessage" class="roadmap-message"></div>
 
-        <div class="icon-circle">
-            <i class="fa-regular fa-map"></i>
-        </div>
-
-        <h1>Learning Roadmap</h1>
-
-        <div class="subLine">
-            <p>Generate a step-by-step learning path for any goal.</p>
-        </div>
-
-        <div class="roadmap-controls">
-            <div class="search-box roadmap-search">
-                <input type="text" id="roadmapTopicInput" placeholder="e.g. Machine Learning, ReactJS, Python...">
-                <select id="roadmapLevelSelect" class="roadmap-level">
-                    <option value="beginner">Beginner</option>
-                    <option value="intermediate">Intermediate</option>
-                    <option value="advanced">Advanced</option>
-                </select>
-                <button id="roadmapGenerateBtn">Get Roadmap</button>
+                <!-- Timeline Container -->
+                <div id="roadmapTimelineContainer" class="roadmap-timeline" style="display:none;"></div>
             </div>
-        </div>
-        
-        <!-- Error / Loading Display -->
-        <div id="roadmapStatusMessage" class="roadmap-message"></div>
+        </section>
 
-        <!-- Timeline Container -->
-        <div id="roadmapTimelineContainer" class="roadmap-timeline" style="display:none;"></div>
+    </main>
 
-        <small>Built with EduGenie AI · Path tailored to your level</small>
-
-    </section>
-
-
-
-
+    <!-- ─── Scripts ─── -->
     <script>
         // ─── Section References ───
         const explainerBtn = document.getElementById("explainerName");
@@ -311,24 +336,11 @@
 
         // ─── Tab Switching ───
         function showSection(activeSection, activeBtn) {
-            allSections.forEach(sec => {
-                sec.style.visibility = 'hidden';
-                sec.style.opacity = '0';
-                sec.style.position = 'absolute';
-                sec.style.top = '-4000px';
-            });
-            allBtns.forEach(btn => {
-                btn.style.background = 'none';
-                btn.style.boxShadow = 'none';
-                btn.style.color = '';
-            });
-            activeSection.style.visibility = 'visible';
-            activeSection.style.opacity = '1';
-            activeSection.style.position = 'relative';
-            activeSection.style.top = '0px';
-            activeBtn.style.background = 'linear-gradient(135deg,#5b5cff,#29d7ff)';
-            activeBtn.style.color = 'white';
-            activeBtn.style.boxShadow = '0 0 25px rgba(0,180,255,.3)';
+            allSections.forEach(sec => sec.classList.remove('active'));
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            activeSection.classList.add('active');
+            activeBtn.classList.add('active');
         }
 
         explainerBtn.addEventListener('click', () => showSection(Explainer, explainerBtn));
@@ -337,64 +349,148 @@
         quizBtn.addEventListener('click', () => showSection(Quiz, quizBtn));
         roadmapBtn.addEventListener('click', () => showSection(roadmap, roadmapBtn));
 
-        // ─── Markdown to HTML Converter ───
+        // ─── Helper: Escape HTML ───
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ─── Robust Markdown to HTML Converter ───
         function markdownToHtml(text) {
             if (!text) return '';
             let html = text;
+
+            // Escape HTML entities safely
             html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            // Multi-line code blocks ```code```
+            html = html.replace(/```(?:[a-zA-Z0-9]+)?\n([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+
+            // Inline code `code`
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // Horizontal rules
             html = html.replace(/^---+$/gm, '<hr>');
+
+            // Headings
             html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
             html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
             html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+            // Bold & italic
             html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
             html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
-            html = html.replace(/^\* (.+)$/gm, '<li>$1</li>');
-            html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
-            html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
-            html = html.replace(/((?:<li>.*<\/li>\n?)+)/g, '<ul>$1</ul>');
-            html = html.replace(/\n\n/g, '</p><p>');
+            html = html.replace(/\*([^\*\n]+)\*/g, '<em>$1</em>');
+
+            // List items with any leading whitespace
+            html = html.replace(/^\s*[\*\-]\s+(.+)$/gm, '<li>$1</li>');
+            html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<li>$1</li>');
+
+            // Group adjacent list items in <ul>
+            html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+            // Paragraphs and line breaks
+            html = html.replace(/\n\n+/g, '</p><p>');
             html = html.replace(/\n/g, '<br>');
             html = '<p>' + html + '</p>';
+
+            // Clean up empty paragraphs & bad wrappers
             html = html.replace(/<p>\s*<\/p>/g, '');
+            html = html.replace(/<p>\s*(<(?:ul|ol|pre|hr|h1|h2|h3)>)/g, '$1');
+            html = html.replace(/(<\/(?:ul|ol|pre|hr|h1|h2|h3)>)\s*<\/p>/g, '$1');
+
             return html;
         }
 
-        // ─── Add response to chat feed ───
+        // ─── Add Message to Chat Feed (ChatGPT / Claude Style) ───
+        let messageCounter = 0;
         function addToChatFeed(section, question, answer) {
             const feed = section.querySelector('.chat-feed-container');
+            section.classList.add('has-messages');
 
-            // Add User Message
+            // 1. Add User Message
             const userMsg = document.createElement('div');
             userMsg.className = 'chat-message user-message';
             userMsg.innerHTML = `
                 <div class="message-content">
-                    <p>${question}</p>
+                    <p>${escapeHtml(question)}</p>
                 </div>
             `;
             feed.appendChild(userMsg);
 
-            // Add AI Message
+            // 2. Add AI Message
+            messageCounter++;
+            const msgId = `ai-msg-body-${messageCounter}`;
             const aiMsg = document.createElement('div');
             aiMsg.className = 'chat-message ai-message';
             aiMsg.innerHTML = `
                 <div class="message-avatar">
                     <i class="fa-solid fa-brain"></i>
                 </div>
-                <div class="message-content">
-                    ${markdownToHtml(answer)}
+                <div class="message-wrapper">
+                    <div class="message-content" id="${msgId}">
+                        ${markdownToHtml(answer)}
+                    </div>
+                    <div class="message-actions">
+                        <button type="button" class="action-btn copy-btn" onclick="copyMessage('${msgId}', this)">
+                            <i class="fa-regular fa-copy"></i> Copy
+                        </button>
+                    </div>
                 </div>
             `;
             feed.appendChild(aiMsg);
 
-            feed.scrollTop = feed.scrollHeight;
+            // Smoothly scroll to the beginning of the AI response for natural reading
+            setTimeout(() => {
+                aiMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
         }
 
-        // ─── Generic API call helper ───
+        // ─── Copy AI Response ───
+        async function copyMessage(elementId, btn) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText || el.textContent;
+            try {
+                await navigator.clipboard.writeText(text);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                btn.style.color = '#22c55e';
+                btn.style.borderColor = 'rgba(34, 197, 94, 0.4)';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        // ─── Clear / New Chat ───
+        function clearChat(section) {
+            const feed = section.querySelector('.chat-feed-container');
+            if (feed) feed.innerHTML = '';
+            section.classList.remove('has-messages');
+        }
+
+        // ─── Starter Prompt Chips ───
+        function useStarterPrompt(section, text) {
+            const input = section.querySelector('.chat-input');
+            const submitBtn = section.querySelector('.send-btn');
+            if (input && submitBtn) {
+                input.value = text;
+                submitBtn.click();
+            }
+        }
+
+        // ─── Generic API Call Helper ───
         async function callAPI(url, body, section, inputEl, question) {
-            const btn = section.querySelector('.search-box button') || section.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Processing...';
+            const btn = section.querySelector('.send-btn');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Thinking...';
             btn.disabled = true;
             if (inputEl) inputEl.disabled = true;
 
@@ -409,52 +505,79 @@
             } catch (error) {
                 addToChatFeed(section, question, 'Error: ' + error.message);
             } finally {
-                btn.innerHTML = originalText;
+                btn.innerHTML = originalContent;
                 btn.disabled = false;
                 if (inputEl) {
                     inputEl.disabled = false;
                     inputEl.value = '';
+                    inputEl.focus();
                 }
             }
         }
 
-        // ─── 1. Explainer → /explain ───
-        const explainerBox = Explainer.querySelector('.search-box');
-        const explainerInput = explainerBox.querySelector('input');
-        const explainerSubmit = explainerBox.querySelector('button');
+        // ─── 1. Explainer Setup ───
+        const explainerInput = Explainer.querySelector('.chat-input');
+        const explainerSubmit = Explainer.querySelector('.send-btn');
 
-        explainerSubmit.addEventListener('click', () => {
+        function triggerExplainer() {
             const topic = explainerInput.value.trim();
-            if (!topic) return alert('Please enter a topic.');
+            if (!topic) return alert('Please enter a topic to explain.');
             callAPI('/explain', { topic: topic }, Explainer, explainerInput, topic);
-        });
+        }
+
+        explainerSubmit.addEventListener('click', triggerExplainer);
         explainerInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') explainerSubmit.click();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                triggerExplainer();
+            }
         });
 
-        // ─── 2. QnA → /qa ───
-        const qnaBox = QnA.querySelector('.search-box');
-        const qnaInput = qnaBox.querySelector('input');
-        const qnaSubmit = qnaBox.querySelector('button');
+        // ─── 2. QnA Hub Setup ───
+        const qnaInput = QnA.querySelector('.chat-input');
+        const qnaSubmit = QnA.querySelector('.send-btn');
 
-        qnaSubmit.addEventListener('click', () => {
+        function triggerQnA() {
             const question = qnaInput.value.trim();
             if (!question) return alert('Please enter a question.');
             callAPI('/qa', { question: question }, QnA, qnaInput, question);
-        });
+        }
+
+        qnaSubmit.addEventListener('click', triggerQnA);
         qnaInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') qnaSubmit.click();
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                triggerQnA();
+            }
         });
 
-        // ─── 3. Summarizer → /summarize ───
-        const summarizerBox = summarizer.querySelector('.search-box');
-        const summarizerInput = summarizerBox.querySelector('input');
-        const summarizerSubmitBtn = summarizer.querySelector('.strength button[type="submit"]');
+        // ─── 3. Summarizer Setup ───
+        const summarizerInput = summarizer.querySelector('.chat-input');
+        const summarizerSubmit = summarizer.querySelector('.send-btn');
+        let currentSummaryLength = 'medium';
 
-        summarizerSubmitBtn.addEventListener('click', () => {
+        // Length selector pills
+        document.querySelectorAll('.length-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.length-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                currentSummaryLength = pill.dataset.length || 'medium';
+            });
+        });
+
+        function triggerSummarizer() {
             const text = summarizerInput.value.trim();
             if (!text) return alert('Please enter text to summarize.');
-            callAPI('/summarize', { text: text }, summarizer, summarizerInput, text.substring(0, 80) + '...');
+            const displayQuestion = text.length > 90 ? text.substring(0, 90) + '...' : text;
+            callAPI('/summarize', { text: text, length: currentSummaryLength }, summarizer, summarizerInput, displayQuestion);
+        }
+
+        summarizerSubmit.addEventListener('click', triggerSummarizer);
+        summarizerInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                triggerSummarizer();
+            }
         });
 
         // ─── 4. Interactive Quiz System ───
@@ -476,7 +599,6 @@
         const quizReview = document.getElementById('quizReview');
         const quizRestartBtn = document.getElementById('quizRestartBtn');
 
-        // Generate quiz
         quizSettingsForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const topic = document.getElementById('quizTopicInput').value.trim();
@@ -506,7 +628,6 @@
                 userAnswers = [];
                 quizScore = 0;
 
-                // Switch to play mode
                 quizSettingsForm.style.display = 'none';
                 quizResults.style.display = 'none';
                 quizPlayArea.style.display = 'block';
@@ -519,7 +640,6 @@
             }
         });
 
-        // Show current question
         function showQuestion() {
             const q = quizData[currentQ];
             const total = quizData.length;
@@ -541,7 +661,6 @@
             });
         }
 
-        // Handle answer selection
         function selectAnswer(selected, clickedBtn) {
             const q = quizData[currentQ];
             const correct = q.correct;
@@ -550,7 +669,6 @@
             if (isCorrect) quizScore++;
             userAnswers.push({ selected, correct, isCorrect });
 
-            // Disable all buttons and show feedback
             const allBtns = quizOptionsDiv.querySelectorAll('.quiz-option-btn');
             allBtns.forEach(btn => {
                 btn.disabled = true;
@@ -563,7 +681,6 @@
                 }
             });
 
-            // Move to next question after a short delay
             setTimeout(() => {
                 currentQ++;
                 if (currentQ < quizData.length) {
@@ -574,7 +691,6 @@
             }, 1000);
         }
 
-        // Show final results
         function showResults() {
             quizPlayArea.style.display = 'none';
             quizResults.style.display = 'block';
@@ -590,7 +706,6 @@
             else if (pct >= 40) quizScoreMessage.textContent = '📚 Not bad, but review the topics.';
             else quizScoreMessage.textContent = '💪 Keep studying, you\'ll improve!';
 
-            // Build review
             let reviewHTML = '<h3>Answer Review</h3>';
             quizData.forEach((q, i) => {
                 const ua = userAnswers[i];
@@ -607,15 +722,13 @@
             quizReview.innerHTML = reviewHTML;
         }
 
-        // Restart quiz
         quizRestartBtn.addEventListener('click', () => {
             quizResults.style.display = 'none';
             quizPlayArea.style.display = 'none';
             quizSettingsForm.style.display = 'flex';
         });
 
-        // ─── 5. Roadmap → /learn/recommendations ───
-        const roadmapSection = document.getElementById('roadmap');
+        // ─── 5. Roadmap Setup ───
         const roadmapTopicInput = document.getElementById('roadmapTopicInput');
         const roadmapLevelSelect = document.getElementById('roadmapLevelSelect');
         const roadmapGenerateBtn = document.getElementById('roadmapGenerateBtn');
@@ -650,7 +763,6 @@
                     return;
                 }
 
-                // Render Timeline
                 roadmapStatusMessage.style.display = 'none';
                 let timelineHTML = `
                     <div class="roadmap-header">
@@ -711,11 +823,7 @@
         roadmapTopicInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') roadmapGenerateBtn.click();
         });
-
     </script>
-
-
-
 </body>
 
 </html>
