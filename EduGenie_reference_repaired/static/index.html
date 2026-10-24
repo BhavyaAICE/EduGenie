@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduGenie — Minimalist AI Academic Studio</title>
+    <link rel="stylesheet" href="/static/style.css?v=repaired">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- ─── Minimalist Header ─── -->
+    <header>
+        <div class="logo">
+            <a href="/" class="logo-title" title="EduGenie AI Academic Studio">
+                <span class="brand-edu">Edu</span><span class="brand-genie">Genie</span>
+                <span class="logo-badge">STUDIO</span>
+            </a>
+        </div>
+
+        <div class="header-status">
+            <span class="status-dot"></span>
+            <span>GEMINI-2.5-FLASH</span>
+        </div>
+    </header>
+
+    <!-- ─── Segmented Workspace Navigation ─── -->
+    <nav>
+        <button class="active" id="explainerName">
+            <i class="fa-solid fa-lightbulb"></i>
+            Explainer
+        </button>
+
+        <button id="QnAName">
+            <i class="fa-solid fa-message"></i>
+            QnA Hub
+        </button>
+
+        <button id="summarizerName">
+            <i class="fa-solid fa-file-lines"></i>
+            Summarizer
+        </button>
+
+        <button id="quizName">
+            <i class="fa-solid fa-list-check"></i>
+            Quiz Engine
+        </button>
+
+        <button id="roadmapName">
+            <i class="fa-solid fa-compass"></i>
+            Curriculum
+        </button>
+    </nav>
+
+    <!-- ─── Main Viewport ─── -->
+    <main class="main-viewport">
+
+        <!-- 1. Explainer View -->
+        <section class="section-view chat-section Explainer active" id="Explainer">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="hero-eyebrow eyebrow-blue">
+                            <i class="fa-solid fa-bolt"></i> Conceptual Synthesis
+                        </div>
+                        <h1>Concept <em>Explainer</em></h1>
+                        <p class="subline">Get rigorous, plain-language breakdowns of complex ideas and academic theorems.</p>
+                        
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Quantum Entanglement')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-blue">Physics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Quantum Entanglement & Non-Locality</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'Recursion in Computer Science')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-purple">Computer Science</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Recursion & Call Stack Mechanics</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(Explainer, 'CRISPR Gene Editing')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-emerald">Biotechnology</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>CRISPR Cas9 Molecular Mechanism</h3>
+                            </div>
+                        </div>
+
+                        <button class="clear-chat-btn" onclick="clearChat(Explainer)">
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
+                        </button>
+                    </div>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="input-card">
+                        <input type="text" class="chat-input" placeholder="Enter topic to dissect (e.g. quantum entanglement, transformers, game theory)...">
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Explain Concept">
+                                <span>Explain</span>
+                            </button>
+                        </div>
+                    </div>
+                    <small class="disclaimer">Structured analytical explanations · Academic reference tool</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. QnA Hub View -->
+        <section class="section-view chat-section QnA" id="QnA">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="hero-eyebrow eyebrow-purple">
+                            <i class="fa-solid fa-comment-dots"></i> Direct Inquiry
+                        </div>
+                        <h1>Academic <em>QnA Hub</em></h1>
+                        <p class="subline">Direct inquiry for scientific concepts, historical context, and technical mechanisms.</p>
+
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'Why does ice float on liquid water?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-amber">Thermodynamics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Why does ice float on liquid water?</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'What causes gravity according to general relativity?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-blue">Astrophysics</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Spacetime curvature vs. Newtonian gravity</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(QnA, 'How do neural networks learn through backpropagation?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-purple">Deep Learning</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Backpropagation & Matrix Chain Rule</h3>
+                            </div>
+                        </div>
+
+                        <button class="clear-chat-btn" onclick="clearChat(QnA)">
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
+                        </button>
+                    </div>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="input-card">
+                        <input type="text" class="chat-input" placeholder="Pose a technical or academic question...">
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Ask AI">
+                                <span>Inquire</span>
+                            </button>
+                        </div>
+                    </div>
+                    <small class="disclaimer">Direct educational verification · Grounded responses</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Summarizer View -->
+        <section class="section-view chat-section summarizer" id="summarizer">
+            <div class="chat-scroll-area">
+                <div class="chat-column">
+                    <div class="welcome-hero">
+                        <div class="hero-eyebrow eyebrow-emerald">
+                            <i class="fa-solid fa-compress"></i> Document Condenser
+                        </div>
+                        <h1>Document <em>Summarizer</em></h1>
+                        <p class="subline">Condense dense literature, research publications, or complex notes into high-signal analytical briefs.</p>
+
+                        <div class="starter-bento">
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Explain Retrieval-Augmented Generation (RAG), how it works, and why it is useful...')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-blue">AI Architecture</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Retrieval-Augmented Generation (RAG)</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'Summarize the core principles of Quantum Computing in simple terms.')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-amber">Computation</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Quantum Superposition & Qubit Circuits</h3>
+                            </div>
+                            <div class="bento-card" onclick="useStarterPrompt(summarizer, 'What are the main differences between supervised, unsupervised, and reinforcement learning?')">
+                                <div class="bento-header">
+                                    <span class="bento-tag tag-emerald">Machine Learning</span>
+                                    <span class="bento-arrow">↗</span>
+                                </div>
+                                <h3>Paradigms: Supervised vs. RL Policies</h3>
+                            </div>
+                        </div>
+
+                        <button class="clear-chat-btn" onclick="clearChat(summarizer)">
+                            <i class="fa-solid fa-arrow-rotate-left"></i> Reset Thread
+                        </button>
+                    </div>
+
+                    <div class="chat-feed-container"></div>
+                </div>
+            </div>
+
+            <div class="chat-input-dock">
+                <div class="dock-inner">
+                    <div class="depth-control">
+                        <span class="control-label">BRIEF DEPTH</span>
+                        <div class="segmented-group">
+                            <button type="button" class="segmented-btn" data-length="Short">Executive</button>
+                            <button type="button" class="segmented-btn active" data-length="medium">Balanced</button>
+                            <button type="button" class="segmented-btn" data-length="Detailed">In-Depth</button>
+                        </div>
+                    </div>
+                    
+                    <div class="input-card">
+                        <textarea class="chat-input summarizer-input" placeholder="Paste source passage or prompt to condense..." rows="2"></textarea>
+                        <div class="dock-actions">
+                            <kbd class="kbd-hint">↵</kbd>
+                            <button type="button" class="send-btn" title="Generate Summary">
+                                <span>Summarize</span>
+                            </button>
+                        </div>
+                    </div>
+                    <small class="disclaimer">High-density summary briefs · Formatted for fast retention</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Quiz View -->
+        <section class="section-view scroll-section Quiz" id="Quiz">
+            <div class="content-container">
+                <div class="welcome-hero" style="margin: 20px 0 32px 0;">
+                    <div class="hero-eyebrow eyebrow-amber">
+                        <i class="fa-solid fa-check-double"></i> Knowledge Verification
+                    </div>
+                    <h1>Assessment <em>Engine</em></h1>
+                    <p class="subline">Interactive evaluation suite designed to test conceptual understanding and recall.</p>
+                </div>
+
+                <div class="QuizGenerator">
+                    <!-- Step 1: Quiz Settings -->
+                    <form class="quizSetting" id="quizSettingsForm">
+                        <h2>Assessment Configuration</h2>
+
+                        <div class="quizSettingTopic">
+                            <label>Domain or Topic</label>
+                            <input type="text" id="quizTopicInput" placeholder="e.g. Distributed Systems, Neural Architecture, Calculus" required>
+                        </div>
+
+                        <div class="quizSettingTopic">
+                            <label>Target Rigor</label>
+                            <select id="quizDifficultySelect" required>
+                                <option value="Easy">Foundational (Easy)</option>
+                                <option value="Medium" selected>Standard (Medium)</option>
+                                <option value="Hard">Advanced (Hard)</option>
+                            </select>
+                        </div>
+
+                        <div class="quizSettingTopic">
+                            <label>Question Quantity</label>
+                            <input type="number" id="quizNumInput" min="1" max="20" value="5" required>
+                        </div>
+
+                        <button type="submit" id="quizGenerateBtn">Construct Assessment</button>
+                    </form>
+
+                    <!-- Step 2: Question Display -->
+                    <div id="quizPlayArea" style="display:none;">
+                        <div class="quiz-progress">
+                            <div class="quiz-progress-bar" id="quizProgressBar"></div>
+                        </div>
+                        <p class="quiz-counter" id="quizCounter">Question 1 / 5</p>
+
+                        <div class="quiz-question-card">
+                            <h3 id="quizQuestionText"></h3>
+                            <div class="quiz-options" id="quizOptions"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Results -->
+                    <div id="quizResults" style="display:none;">
+                        <div class="quiz-score-display">
+                            <h2>Assessment Complete</h2>
+                            <div class="quiz-score-circle" id="quizScoreCircle">
+                                <span id="quizScoreText">0/5</span>
+                            </div>
+                            <p id="quizScoreMessage"></p>
+                        </div>
+
+                        <div class="quiz-review" id="quizReview"></div>
+
+                        <button class="quiz-restart-btn" id="quizRestartBtn">Generate Another Assessment</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Curriculum / Roadmap View -->
+        <section class="section-view scroll-section roadmap" id="roadmap">
+            <div class="content-container">
+                <div class="welcome-hero" style="margin: 20px 0 32px 0;">
+                    <div class="hero-eyebrow eyebrow-rose">
+                        <i class="fa-solid fa-map-location-dot"></i> Structured Mastery
+                    </div>
+                    <h1>Curriculum <em>Roadmap</em></h1>
+                    <p class="subline">Generate step-by-step master syllabi from foundational principles to advanced mastery.</p>
+                </div>
+
+                <div class="roadmap-controls">
+                    <div class="roadmap-search">
+                        <input type="text" id="roadmapTopicInput" placeholder="e.g. Machine Learning, Compilers, Distributed Consensus...">
+                        <select id="roadmapLevelSelect" class="roadmap-level">
+                            <option value="beginner">Beginner</option>
+                            <option value="intermediate" selected>Intermediate</option>
+                            <option value="advanced">Advanced</option>
+                        </select>
+                        <button id="roadmapGenerateBtn">Build Path</button>
+                    </div>
+                </div>
+
+                <!-- Error / Loading Display -->
+                <div id="roadmapStatusMessage" class="roadmap-message"></div>
+
+                <!-- Timeline Container -->
+                <div id="roadmapTimelineContainer" class="roadmap-timeline" style="display:none;"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ─── Core Application Logic ─── -->
+    <script src="/static/config.js"></script>
+    <script>
+        // Dynamic API URL builder
+        const getApiUrl = (endpoint) => ((window.API_BASE_URL || "").replace(/\/+$/, "")) + endpoint;
+
+        // ─── Section References ───
+        const explainerBtn = document.getElementById("explainerName");
+        const Explainer = document.getElementById("Explainer");
+        const QnABtn = document.getElementById("QnAName");
+        const QnA = document.getElementById("QnA");
+        const summarizerBtn = document.getElementById("summarizerName");
+        const summarizer = document.getElementById("summarizer");
+        const quizBtn = document.getElementById("quizName");
+        const Quiz = document.getElementById("Quiz");
+        const roadmapBtn = document.getElementById("roadmapName");
+        const roadmap = document.getElementById("roadmap");
+
+        const allSections = [Explainer, QnA, summarizer, Quiz, roadmap];
+        const allBtns = [explainerBtn, QnABtn, summarizerBtn, quizBtn, roadmapBtn];
+
+        // ─── Tab Switching ───
+        function showSection(activeSection, activeBtn) {
+            allSections.forEach(sec => sec.classList.remove('active'));
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            activeSection.classList.add('active');
+            activeBtn.classList.add('active');
+        }
+
+        explainerBtn.addEventListener('click', () => showSection(Explainer, explainerBtn));
+        QnABtn.addEventListener('click', () => showSection(QnA, QnABtn));
+        summarizerBtn.addEventListener('click', () => showSection(summarizer, summarizerBtn));
+        quizBtn.addEventListener('click', () => showSection(Quiz, quizBtn));
+        roadmapBtn.addEventListener('click', () => showSection(roadmap, roadmapBtn));
+
+        // ─── Helper: Escape HTML ───
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // ─── Robust Document Markdown Parser ───
+        function markdownToHtml(text) {
+            if (!text) return '';
+            let html = text;
+
+            // Escape HTML entities safely
+            html = html.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+            // Multi-line code blocks
+            html = html.replace(/```(?:[a-zA-Z0-9]+)?\n([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // Horizontal rules
+            html = html.replace(/^---+$/gm, '<hr>');
+
+            // Headings
+            html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+            // Bold & italic
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^\*\n]+)\*/g, '<em>$1</em>');
+
+            // List items with any leading whitespace
+            html = html.replace(/^\s*[\*\-]\s+(.+)$/gm, '<li>$1</li>');
+            html = html.replace(/^\s*\d+\.\s+(.+)$/gm, '<li>$1</li>');
+
+            // Group adjacent list items in <ul>
+            html = html.replace(/((?:<li>.*?<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+            // Paragraphs and line breaks
+            html = html.replace(/\n\n+/g, '</p><p>');
+            html = html.replace(/\n/g, '<br>');
+            html = '<p>' + html + '</p>';
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p>\s*<\/p>/g, '');
+            html = html.replace(/<p>\s*(<(?:ul|ol|pre|hr|h1|h2|h3)>)/g, '$1');
+            html = html.replace(/(<\/(?:ul|ol|pre|hr|h1|h2|h3)>)\s*<\/p>/g, '$1');
+
+            return html;
+        }
+
+        // ─── Add Message to Chat Feed (Editorial Document Style) ───
+        let messageCounter = 0;
+        function addToChatFeed(section, question, answer) {
+            const feed = section.querySelector('.chat-feed-container');
+            section.classList.add('has-messages');
+
+            // 1. Add User Message
+            const userMsg = document.createElement('div');
+            userMsg.className = 'chat-message user-message';
+            userMsg.innerHTML = `
+                <div class="message-content">
+                    <p>${escapeHtml(question)}</p>
+                </div>
+            `;
+            feed.appendChild(userMsg);
+
+            // 2. Add AI Response Card
+            messageCounter++;
+            const msgId = `ai-msg-body-${messageCounter}`;
+            const aiMsg = document.createElement('div');
+            aiMsg.className = 'chat-message ai-message';
+            aiMsg.innerHTML = `
+                <div class="ai-avatar-mark">EG</div>
+                <div class="message-wrapper">
+                    <div class="message-content" id="${msgId}">
+                        ${markdownToHtml(answer)}
+                    </div>
+                    <div class="message-actions">
+                        <button type="button" class="action-btn copy-btn" onclick="copyMessage('${msgId}', this)">
+                            <i class="fa-regular fa-copy"></i> Copy Brief
+                        </button>
+                    </div>
+                </div>
+            `;
+            feed.appendChild(aiMsg);
+
+            // Smoothly scroll to the beginning of the AI response for natural reading
+            setTimeout(() => {
+                aiMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 60);
+        }
+
+        // ─── Copy Document Action ───
+        async function copyMessage(elementId, btn) {
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            const text = el.innerText || el.textContent;
+            try {
+                await navigator.clipboard.writeText(text);
+                const originalHtml = btn.innerHTML;
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                btn.style.color = 'var(--accent-sage)';
+                btn.style.borderColor = 'rgba(147, 183, 162, 0.4)';
+                setTimeout(() => {
+                    btn.innerHTML = originalHtml;
+                    btn.style.color = '';
+                    btn.style.borderColor = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+
+        // ─── Clear / Reset Thread ───
+        function clearChat(section) {
+            const feed = section.querySelector('.chat-feed-container');
+            if (feed) feed.innerHTML = '';
+            section.classList.remove('has-messages');
+        }
+
+        // ─── Starter Prompt Bento ───
+        function useStarterPrompt(section, text) {
+            const input = section.querySelector('.chat-input');
+            const submitBtn = section.querySelector('.send-btn');
+            if (input && submitBtn) {
+                input.value = text;
+                submitBtn.click();
+            }
+        }
+
+        // ─── Generic API Call Helper ───
+        async function callAPI(url, body, section, inputEl, question) {
+            const btn = section.querySelector('.send-btn');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Synthesizing...';
+            btn.disabled = true;
+            if (inputEl) inputEl.disabled = true;
+
+            try {
+                const fullUrl = url.startsWith("http") ? url : getApiUrl(url);
+                const response = await fetch(fullUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+                const data = await response.json();
+                addToChatFeed(section, question, data.response);
+            } catch (error) {
+                addToChatFeed(section, question, 'Error: ' + error.message);
+            } finally {
+                btn.innerHTML = originalContent;
+                btn.disabled = false;
+                if (inputEl) {
+                    inputEl.disabled = false;
+                    inputEl.value = '';
+                    inputEl.focus();
+                }
+            }
+        }
+
+        // ─── 1. Explainer Setup ───
+        const explainerInput = Explainer.querySelector('.chat-input');
+        const explainerSubmit = Explainer.querySelector('.send-btn');
+
+        function triggerExplainer() {
+            const topic = explainerInput.value.trim();
+            if (!topic) return alert('Please enter a concept to explain.');
+            callAPI('/explain', { topic: topic }, Explainer, explainerInput, topic);
+        }
+
+        explainerSubmit.addEventListener('click', triggerExplainer);
+        explainerInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                triggerExplainer();
+            }
+        });
+
+        // ─── 2. QnA Hub Setup ───
+        const qnaInput = QnA.querySelector('.chat-input');
+        const qnaSubmit = QnA.querySelector('.send-btn');
+
+        function triggerQnA() {
+            const question = qnaInput.value.trim();
+            if (!question) return alert('Please enter a question.');
+            callAPI('/qa', { question: question }, QnA, qnaInput, question);
+        }
+
+        qnaSubmit.addEventListener('click', triggerQnA);
+        qnaInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                triggerQnA();
+            }
+        });
+
+        // ─── 3. Summarizer Setup ───
+        const summarizerInput = summarizer.querySelector('.chat-input');
+        const summarizerSubmit = summarizer.querySelector('.send-btn');
+        let currentSummaryLength = 'medium';
+
+        // Depth control segmented buttons
+        document.querySelectorAll('.segmented-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.segmented-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentSummaryLength = btn.dataset.length || 'medium';
+            });
+        });
+
+        function triggerSummarizer() {
+            const text = summarizerInput.value.trim();
+            if (!text) return alert('Please enter text or a query to summarize.');
+            const displayQuestion = text.length > 90 ? text.substring(0, 90) + '...' : text;
+            callAPI('/summarize', { text: text, length: currentSummaryLength }, summarizer, summarizerInput, displayQuestion);
+        }
+
+        summarizerSubmit.addEventListener('click', triggerSummarizer);
+        summarizerInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                triggerSummarizer();
+            }
+        });
+
+        // ─── 4. Quiz Engine Setup ───
+        let quizData = [];
+        let currentQ = 0;
+        let userAnswers = [];
+        let quizScore = 0;
+
+        const quizSettingsForm = document.getElementById('quizSettingsForm');
+        const quizPlayArea = document.getElementById('quizPlayArea');
+        const quizResults = document.getElementById('quizResults');
+        const quizGenerateBtn = document.getElementById('quizGenerateBtn');
+        const quizProgressBar = document.getElementById('quizProgressBar');
+        const quizCounter = document.getElementById('quizCounter');
+        const quizQuestionText = document.getElementById('quizQuestionText');
+        const quizOptionsDiv = document.getElementById('quizOptions');
+        const quizScoreText = document.getElementById('quizScoreText');
+        const quizScoreMessage = document.getElementById('quizScoreMessage');
+        const quizReview = document.getElementById('quizReview');
+        const quizRestartBtn = document.getElementById('quizRestartBtn');
+
+        quizSettingsForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const topic = document.getElementById('quizTopicInput').value.trim();
+            const numQ = parseInt(document.getElementById('quizNumInput').value) || 5;
+            const difficulty = document.getElementById('quizDifficultySelect').value;
+            if (!topic) return alert('Please enter a quiz topic.');
+
+            quizGenerateBtn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Generating...';
+            quizGenerateBtn.disabled = true;
+
+            try {
+                const response = await fetch(getApiUrl('/quiz'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic, num_questions: numQ, difficulty })
+                });
+                const data = await response.json();
+                const result = data.response;
+
+                if (result.error) {
+                    alert(result.error);
+                    return;
+                }
+
+                quizData = result.questions;
+                currentQ = 0;
+                userAnswers = [];
+                quizScore = 0;
+
+                quizSettingsForm.style.display = 'none';
+                quizResults.style.display = 'none';
+                quizPlayArea.style.display = 'block';
+                showQuestion();
+            } catch (error) {
+                alert('Error generating quiz: ' + error.message);
+            } finally {
+                quizGenerateBtn.textContent = 'Construct Assessment';
+                quizGenerateBtn.disabled = false;
+            }
+        });
+
+        function showQuestion() {
+            const q = quizData[currentQ];
+            const total = quizData.length;
+            const progress = ((currentQ) / total) * 100;
+
+            quizProgressBar.style.width = progress + '%';
+            quizCounter.textContent = `Question ${currentQ + 1} / ${total}`;
+            quizQuestionText.textContent = q.question;
+
+            quizOptionsDiv.innerHTML = '';
+            ['A', 'B', 'C', 'D'].forEach(key => {
+                if (q.options[key]) {
+                    const btn = document.createElement('button');
+                    btn.className = 'quiz-option-btn';
+                    btn.innerHTML = `<span class="option-key">${key}</span> ${q.options[key]}`;
+                    btn.addEventListener('click', () => selectAnswer(key, btn));
+                    quizOptionsDiv.appendChild(btn);
+                }
+            });
+        }
+
+        function selectAnswer(selected, clickedBtn) {
+            const q = quizData[currentQ];
+            const correct = q.correct;
+            const isCorrect = selected === correct;
+
+            if (isCorrect) quizScore++;
+            userAnswers.push({ selected, correct, isCorrect });
+
+            const allBtns = quizOptionsDiv.querySelectorAll('.quiz-option-btn');
+            allBtns.forEach(btn => {
+                btn.disabled = true;
+                btn.style.cursor = 'default';
+                const key = btn.querySelector('.option-key').textContent;
+                if (key === correct) {
+                    btn.classList.add('correct');
+                } else if (key === selected && !isCorrect) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            setTimeout(() => {
+                currentQ++;
+                if (currentQ < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResults();
+                }
+            }, 1000);
+        }
+
+        function showResults() {
+            quizPlayArea.style.display = 'none';
+            quizResults.style.display = 'block';
+
+            const total = quizData.length;
+            const pct = Math.round((quizScore / total) * 100);
+
+            quizScoreText.textContent = `${quizScore}/${total}`;
+            quizProgressBar.style.width = '100%';
+
+            if (pct >= 80) quizScoreMessage.textContent = 'High Mastery: Exceptional conceptual retention.';
+            else if (pct >= 60) quizScoreMessage.textContent = 'Solid Grasp: Good conceptual foundation.';
+            else if (pct >= 40) quizScoreMessage.textContent = 'Review Recommended: Revisit foundational sections.';
+            else quizScoreMessage.textContent = 'Active Study Required: Re-read core explanations.';
+
+            let reviewHTML = '<h3>Answer Review</h3>';
+            quizData.forEach((q, i) => {
+                const ua = userAnswers[i];
+                const icon = ua.isCorrect ? '✓' : '✗';
+                reviewHTML += `
+                    <div class="quiz-review-item ${ua.isCorrect ? 'review-correct' : 'review-wrong'}">
+                        <p class="review-q"><strong>${icon} Q${i + 1}:</strong> ${q.question}</p>
+                        <p class="review-answer">Your answer: <strong>${ua.selected}</strong> — ${q.options[ua.selected]}</p>
+                        ${!ua.isCorrect ? `<p class="review-correct-answer">Correct answer: <strong>${ua.correct}</strong> — ${q.options[ua.correct]}</p>` : ''}
+                        <p class="review-explanation">Rationale: ${q.explanation}</p>
+                    </div>
+                `;
+            });
+            quizReview.innerHTML = reviewHTML;
+        }
+
+        quizRestartBtn.addEventListener('click', () => {
+            quizResults.style.display = 'none';
+            quizPlayArea.style.display = 'none';
+            quizSettingsForm.style.display = 'flex';
+        });
+
+        // ─── 5. Curriculum Roadmap Setup ───
+        const roadmapTopicInput = document.getElementById('roadmapTopicInput');
+        const roadmapLevelSelect = document.getElementById('roadmapLevelSelect');
+        const roadmapGenerateBtn = document.getElementById('roadmapGenerateBtn');
+        const roadmapTimelineContainer = document.getElementById('roadmapTimelineContainer');
+        const roadmapStatusMessage = document.getElementById('roadmapStatusMessage');
+
+        roadmapGenerateBtn.addEventListener('click', async () => {
+            const topic = roadmapTopicInput.value.trim();
+            const level = roadmapLevelSelect.value;
+            if (!topic) return alert('Please enter a topic for your curriculum.');
+
+            roadmapGenerateBtn.innerHTML = '<svg class="spinner" viewBox="0 0 50 50"><circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg> Building...';
+            roadmapGenerateBtn.disabled = true;
+            roadmapTopicInput.disabled = true;
+            roadmapLevelSelect.disabled = true;
+
+            roadmapTimelineContainer.style.display = 'none';
+            roadmapStatusMessage.style.display = 'block';
+            roadmapStatusMessage.innerHTML = '<p>Synthesizing curriculum structure...</p>';
+
+            try {
+                const response = await fetch(getApiUrl('/learn/recommendations'), {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ topic: topic, level: level })
+                });
+                const data = await response.json();
+                const result = data.response;
+
+                if (result.error) {
+                    roadmapStatusMessage.innerHTML = `<p class="error-text">Error: ${result.error}</p>`;
+                    return;
+                }
+
+                roadmapStatusMessage.style.display = 'none';
+                let timelineHTML = `
+                    <div class="roadmap-header">
+                        <h2>Curriculum: ${result.topic || topic}</h2>
+                        <span class="roadmap-badge">${result.level || level}</span>
+                    </div>
+                `;
+
+                if (result.roadmap && Array.isArray(result.roadmap)) {
+                    result.roadmap.forEach((phase, index) => {
+                        let topicsHTML = phase.topics ? phase.topics.map(t => `<li>${t}</li>`).join('') : '';
+                        let resourcesHTML = phase.resources ? phase.resources.map(r => `<li><i class="fa-solid fa-arrow-up-right-from-square"></i> ${r}</li>`).join('') : '';
+
+                        timelineHTML += `
+                            <div class="timeline-step">
+                                <div class="timeline-marker">${index + 1}</div>
+                                <div class="timeline-content">
+                                    <div class="timeline-title-row">
+                                        <h3>${phase.phase}</h3>
+                                        ${phase.estimated_time ? `<span class="time-est"><i class="fa-regular fa-clock"></i> ${phase.estimated_time}</span>` : ''}
+                                    </div>
+                                    <p class="timeline-desc">${phase.description}</p>
+                                    
+                                    <div class="timeline-details">
+                                        ${topicsHTML ? `
+                                        <div class="detail-box">
+                                            <h4>Core Competencies</h4>
+                                            <ul>${topicsHTML}</ul>
+                                        </div>` : ''}
+                                        
+                                        ${resourcesHTML ? `
+                                        <div class="detail-box">
+                                            <h4>Recommended References</h4>
+                                            <ul class="resource-list">${resourcesHTML}</ul>
+                                        </div>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                } else {
+                    timelineHTML += '<p>Failed to parse curriculum steps. Please try again.</p>';
+                }
+
+                roadmapTimelineContainer.innerHTML = timelineHTML;
+                roadmapTimelineContainer.style.display = 'block';
+
+            } catch (error) {
+                roadmapStatusMessage.innerHTML = `<p class="error-text">Error generating curriculum: ${error.message}</p>`;
+            } finally {
+                roadmapGenerateBtn.textContent = 'Build Path';
+                roadmapGenerateBtn.disabled = false;
+                roadmapTopicInput.disabled = false;
+                roadmapLevelSelect.disabled = false;
+            }
+        });
+
+        roadmapTopicInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') roadmapGenerateBtn.click();
+        });
+    </script>
+</body>
+
+</html>

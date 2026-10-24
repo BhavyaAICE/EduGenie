@@ -1,0 +1,6 @@
+"""
+Utils package initializer.
+"""
+from .gemini_client import get_gemini_client
+
+__all__ = ["get_gemini_client"]

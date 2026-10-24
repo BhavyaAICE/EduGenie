@@ -29,7 +29,6 @@ EduGenie/
 ├── summary_module.py        # Summarization module (Gemini)
 ├── learning_path.py         # Learning Path Recommendations module (Gemini)
 ├── requirements.txt         # Python dependencies
-├── render.yaml              # Render deployment blueprint
 ├── .env.example             # Environment variable template
 ├── .gitignore
 ├── static/
@@ -73,14 +72,15 @@ EduGenie/
    http://127.0.0.1:8000
    ```
 
-## Deploy to Render
+## Production Cloud Deployment
 
 1. Push your code to GitHub
-2. Go to [render.com](https://render.com) → **New** → **Web Service**
-3. Connect your GitHub repo (`BhavyaAICE/EduGenie`)
-4. Render will auto-detect `render.yaml` and configure everything
-5. Add your `GOOGLE_API_KEY` in the **Environment** tab
-6. Click **Deploy** 🚀
+2. Create a **Web Service** on your chosen cloud platform (Render, Railway, Koyeb, etc.)
+3. Configure the build and start commands:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+4. Add your `GOOGLE_API_KEY` in the environment settings
+5. Deploy and verify at `/health` 🚀
 
 ## API Endpoints
 

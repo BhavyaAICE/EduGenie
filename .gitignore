@@ -19,3 +19,13 @@ Screenshot*.png
 *.pdf
 
 .aider-desk/
+.agents/
+
+# Independent Challenge Repositories
+frankenstein-edugenie-frontend/
+frankenstein-edugenie-backend/
+frankenstein-edugenie-features/
+
+# Local backup directory
+EduGenie_original_backup/
+skills-lock.json
